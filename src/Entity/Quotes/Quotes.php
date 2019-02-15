@@ -8,18 +8,48 @@ namespace App\Entity\Quotes;
 
 use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * Class Quotes
  * @package App\Entity\Quotes
  * @ORM\Entity
- * @ApiResource()
+ * @ORM\Table(name="QUOTES_quotes")
+ * @ApiResource(attributes={
+ *     "normalization_context"={"groups"={"get", "post"}},
+ *     "denormalization_context"={"groups"={"post"}}
+ * })
  */
 class Quotes
+
+/*
+
+ *     denormalizationContext={"get"},
+ *     normalizationContext={"post", "get"},
+
+ *     collectionOperations={
+ *          "POST"={
+ *              "normalization_context"={"groups"={"post"}},
+ *              "denormalization_context"={"groups"={"post"}},
+ *          },
+ *          "GET"
+ *     }
+ */
+
 {
+
     //////////////////////////////////
     // RELATIONS
     //////////////////////////////////
+
+    /**
+     * @var \App\Entity\Quotes\QuotesAdministrativeState
+     * @Groups({"post", "get"})
+     *
+     * @ORM\ManyToOne(targetEntity="\App\Entity\Quotes\QuotesAdministrativeState", cascade={"persist"})
+     * @ORM\JoinColumn(name="administrative_state_id", referencedColumnName="id", onDelete="CASCADE")
+     */
+    private $administrativeState;
 
 
     //////////////////////////////////
@@ -27,7 +57,8 @@ class Quotes
     //////////////////////////////////
 
     /**
-     * @var int The id of the quotes.
+     * @var int Id of the quotes.
+     * @Groups({"get"})
      *
      * @ORM\Id
      * @ORM\GeneratedValue
@@ -36,7 +67,8 @@ class Quotes
     private $id;
 
     /**
-     * @var \DateTime The creation date of the quotes
+     * @var \DateTime Creation date of the quotes
+     * @Groups({"post", "get"})
      *
      * @ORM\Column(type="datetime", nullable=false)
      */
@@ -44,6 +76,7 @@ class Quotes
 
     /**
      * @var float Discount of the quotes
+     * @Groups({"post", "get"})
      *
      * @ORM\Column(type="float", nullable=true)
      */
@@ -51,10 +84,29 @@ class Quotes
 
     /**
      * @var float Selling price of the quotes
+     * @Groups({"post", "get"})
      *
      * @ORM\Column(type="float", nullable=true)
      */
     private $sellingPrice;
+
+    /**
+     * @return QuotesAdministrativeState
+     */
+    public function getAdministrativeState(): QuotesAdministrativeState
+    {
+        return $this->administrativeState;
+    }
+
+    /**
+     * @param QuotesAdministrativeState $administrativeState
+     * @return Quotes
+     */
+    public function setAdministrativeState(QuotesAdministrativeState $administrativeState): Quotes
+    {
+        $this->administrativeState = $administrativeState;
+        return $this;
+    }
 
     /**
      * @return int
@@ -66,10 +118,12 @@ class Quotes
 
     /**
      * @param int $id
+     * @return Quotes
      */
-    public function setId(int $id): void
+    public function setId(int $id): Quotes
     {
         $this->id = $id;
+        return $this;
     }
 
     /**
@@ -82,10 +136,12 @@ class Quotes
 
     /**
      * @param \DateTime $date
+     * @return Quotes
      */
-    public function setDate(\DateTime $date): void
+    public function setDate(\DateTime $date): Quotes
     {
         $this->date = $date;
+        return $this;
     }
 
     /**
@@ -98,10 +154,12 @@ class Quotes
 
     /**
      * @param float $discount
+     * @return Quotes
      */
-    public function setDiscount(float $discount): void
+    public function setDiscount(float $discount): Quotes
     {
         $this->discount = $discount;
+        return $this;
     }
 
     /**
@@ -114,10 +172,12 @@ class Quotes
 
     /**
      * @param float $sellingPrice
+     * @return Quotes
      */
-    public function setSellingPrice(float $sellingPrice): void
+    public function setSellingPrice(float $sellingPrice): Quotes
     {
         $this->sellingPrice = $sellingPrice;
+        return $this;
     }
 
 }
