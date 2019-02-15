@@ -2,15 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="07960ef7-0cfb-405b-9164-ec4ac2af722c" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Entity/Actor/ActorClient.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Entity/Quotes/QuotesAdministrativeStateHistory.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Entity/Quotes/QuotesLine.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Entity/Quotes/QuotesProgressStatusHistory.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/madera-api.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/madera-api.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Quotes/Quotes.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Quotes/Quotes.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -23,14 +16,23 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Entity/Actor/ActorClient.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="116">
-              <caret line="277" column="7" lean-forward="true" selection-start-line="277" selection-start-column="7" selection-end-line="277" selection-end-column="7" />
+              <caret line="277" column="7" selection-start-line="277" selection-start-column="7" selection-end-line="277" selection-end-column="7" />
               <folding>
                 <element signature="e#88#132#0#PHP" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/.gitignore">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="192">
+              <caret line="8" column="5" lean-forward="true" selection-start-line="8" selection-start-column="5" selection-end-line="8" selection-end-column="5" />
             </state>
           </provider>
         </entry>
@@ -155,7 +157,6 @@
         <option value="$PROJECT_DIR$/src/Entity/Devis/Devis.php" />
         <option value="$PROJECT_DIR$/src/Entity/Quotes/Devis.php" />
         <option value="$PROJECT_DIR$/.env" />
-        <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/src/Entity/Actor/Commercial.php" />
         <option value="$PROJECT_DIR$/src/Entity/Quotes/QuotesProgressStatus.php" />
         <option value="$PROJECT_DIR$/src/Entity/Quotes/QuotesAdministrativeState.php" />
@@ -164,6 +165,7 @@
         <option value="$PROJECT_DIR$/src/Entity/Quotes/QuotesProgressStatusHistory.php" />
         <option value="$PROJECT_DIR$/src/Entity/Quotes/QuotesLine.php" />
         <option value="$PROJECT_DIR$/src/Entity/Actor/ActorClient.php" />
+        <option value="$PROJECT_DIR$/.gitignore" />
       </list>
     </option>
   </component>
@@ -318,12 +320,12 @@
       <workItem from="1550134658580" duration="1570000" />
       <workItem from="1550136252041" duration="61000" />
       <workItem from="1550136335307" duration="2363000" />
-      <workItem from="1550218350856" duration="6807000" />
+      <workItem from="1550218350856" duration="7032000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="27859000" />
+    <option name="totallyTimeSpent" value="28084000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -335,7 +337,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="-1" width="1920" height="1048" extended-state="7" />
+    <frame x="0" y="-1" width="1920" height="1048" extended-state="6" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.1670224" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -351,7 +353,7 @@
       <window_info anchor="bottom" id="Database Changes" order="8" />
       <window_info anchor="bottom" id="Version Control" order="9" weight="0.32936078" />
       <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.5005365" side_tool="true" weight="0.61930585" />
-      <window_info active="true" anchor="bottom" id="Terminal" internal_type="SLIDING" order="11" sideWeight="0.49946353" type="SLIDING" visible="true" weight="0.3802817" />
+      <window_info anchor="bottom" id="Terminal" internal_type="SLIDING" order="11" sideWeight="0.49946353" type="SLIDING" weight="0.3802817" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -364,13 +366,6 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/src/Kernel.php">
       <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/.gitignore">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="130">
-          <caret line="5" column="16" lean-forward="true" selection-start-line="5" selection-start-column="16" selection-end-line="5" selection-end-column="16" />
-        </state>
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/.env">
       <provider selected="true" editor-type-id="text-editor">
@@ -465,10 +460,17 @@
     <entry file="file://$PROJECT_DIR$/src/Entity/Actor/ActorClient.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="116">
-          <caret line="277" column="7" lean-forward="true" selection-start-line="277" selection-start-column="7" selection-end-line="277" selection-end-column="7" />
+          <caret line="277" column="7" selection-start-line="277" selection-start-column="7" selection-end-line="277" selection-end-column="7" />
           <folding>
             <element signature="e#88#132#0#PHP" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="192">
+          <caret line="8" column="5" lean-forward="true" selection-start-line="8" selection-start-column="5" selection-end-line="8" selection-end-column="5" />
         </state>
       </provider>
     </entry>
