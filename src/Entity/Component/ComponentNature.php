@@ -8,16 +8,31 @@ namespace App\Entity\Component;
 
 use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * Class ComponentNature
  * @package App\Entity\Component
  * @ORM\Entity
  * @ORM\Table(name="COMPONENT_nature")
- * @ApiResource()
+ * @ApiResource(
+ *     normalizationContext={"groups"={"component-nature"}}
+ * )
  */
 class ComponentNature
 {
+
+    //////////////////////////////////
+    // RELATIONS
+    //////////////////////////////////
+
+    /**
+     * @Groups({"component-nature"})
+     *
+     * @ORM\ManyToOne(targetEntity="ComponentUnit", inversedBy="componentNatures")
+     * @ORM\JoinColumn(name="component_unit_id", referencedColumnName="id", onDelete="CASCADE")
+     */
+    private $componentUnit;
 
     //////////////////////////////////
     // PROPERTIES
@@ -25,6 +40,7 @@ class ComponentNature
 
     /**
      * @var int ComponentNature Id
+     * @Groups({"component-nature"})
      *
      * @ORM\Id
      * @ORM\GeneratedValue
@@ -34,10 +50,29 @@ class ComponentNature
 
     /**
      * @var string ComponentNature Label
+     * @Groups({"component-nature"})
      *
      * @ORM\Column(type="string", nullable=false)
      */
     private $label;
+
+    /**
+     * @return mixed
+     */
+    public function getComponentUnit()
+    {
+        return $this->componentUnit;
+    }
+
+    /**
+     * @param mixed $componentUnit
+     * @return ComponentNature
+     */
+    public function setComponentUnit($componentUnit): ComponentNature
+    {
+        $this->componentUnit = $componentUnit;
+        return $this;
+    }
 
     /**
      * @return int
