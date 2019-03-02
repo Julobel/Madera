@@ -16,7 +16,14 @@ use Symfony\Component\Serializer\Annotation\Groups;
  * @ORM\Entity
  * @ORM\Table(name="COMPONENT_nature")
  * @ApiResource(
- *     normalizationContext={"groups"={"component-nature"}}
+ *     collectionOperations={
+ *          "GET"={
+ *             "normalization_context"={"groups"={"get-component-nature"}}
+ *           },
+ *          "POST"={
+ *             "denormalization_context"={"groups"={"post-component-nature"}}
+ *          }
+ *     },
  * )
  */
 class ComponentNature
@@ -27,9 +34,9 @@ class ComponentNature
     //////////////////////////////////
 
     /**
-     * @Groups({"component-nature"})
+     * @Groups({"get-component-nature", "post-component-nature"})
      *
-     * @ORM\ManyToOne(targetEntity="ComponentUnit", inversedBy="componentNatures")
+     * @ORM\ManyToOne(targetEntity="ComponentUnit")
      * @ORM\JoinColumn(name="component_unit_id", referencedColumnName="id", onDelete="CASCADE")
      */
     private $componentUnit;
@@ -40,7 +47,7 @@ class ComponentNature
 
     /**
      * @var int ComponentNature Id
-     * @Groups({"component-nature"})
+     * @Groups({"get-component-nature", "post-component-nature"})
      *
      * @ORM\Id
      * @ORM\GeneratedValue
@@ -50,7 +57,7 @@ class ComponentNature
 
     /**
      * @var string ComponentNature Label
-     * @Groups({"component-nature"})
+     * @Groups({"get-component-nature", "post-component-nature"})
      *
      * @ORM\Column(type="string", nullable=false)
      */
