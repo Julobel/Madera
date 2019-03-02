@@ -25,4 +25,14 @@ abstract class MaderaFixtures extends Fixture implements OrderedFixtureInterface
 
     //MODULE PACKAGE
     const MODULE = MaderaFixtures::COMPONENT+1;
+
+    //ACCOUNTING PACKAGE
+
+    //ACTOR PACKAGE
+
+    //PROJECT PACKAGE
+
+    //QUOTES PACKAGE
+
+    //RANGE PACKAGE
 }
