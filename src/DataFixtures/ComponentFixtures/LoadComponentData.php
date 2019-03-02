@@ -15,11 +15,14 @@ class LoadComponentData extends MaderaFixtures{
      */
     public function load(ObjectManager $manager) {
         $poutre = new Component();
-        $poutre ->setLabel("poutre");
-        $poutre ->setLength(2400);
-        $poutre ->setSection(35);
-        $poutre ->setThickness(20);
-        $poutre ->setWidth(50);
+        $poutre ->setLabel("poutre")
+            ->setLength(2400)
+            ->setSection(35)
+            ->setThickness(20)
+            ->setWidth(50)
+            ->setComponentNature($this->getReference('component-nature-montant'))
+            ->addPrice($this->getReference('component-price-price1'))
+            ->addPrice($this->getReference('component-price-price2'));
         $manager ->persist($poutre);
 
         $clou = new Component();
@@ -28,6 +31,9 @@ class LoadComponentData extends MaderaFixtures{
         $clou ->setSection(0);
         $clou ->setThickness(0);
         $clou ->setWidth(0);
+        $clou ->setComponentNature($this->getReference('component-nature-elt-montage'))
+            ->addPrice($this->getReference('component-price-price3'))
+            ->addPrice($this->getReference('component-price-price4'));
         $manager->persist($clou);
 
         $manager->flush();
