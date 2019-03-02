@@ -21,28 +21,12 @@ use Symfony\Component\Serializer\Annotation\Groups;
 class ComponentUnit
 {
     //////////////////////////////////
-    // RELATIONS
-    //////////////////////////////////
-
-    /**
-     * @ORM\OneToMany(targetEntity="ComponentNature", mappedBy="componentUnit")
-     * @ORM\JoinColumn(name="component_nature_id", referencedColumnName="id", onDelete="CASCADE")
-     */
-    private $componentNatures;
-
-
-    //////////////////////////////////
     // PROPERTIES
     //////////////////////////////////
 
-    public function __construct()
-    {
-        $this->componentNatures = new ArrayCollection();
-    }
-
     /**
      * @var int ComponentUnit Id
-     * @Groups({"component-nature"})
+     * @Groups({"get-component-nature"})
      *
      * @ORM\Id
      * @ORM\GeneratedValue
@@ -52,29 +36,11 @@ class ComponentUnit
 
     /**
      * @var string ComponentUnit Label
-     * @Groups({"component-nature"})
+     * @Groups({"get-component-nature"})
      *
      * @ORM\Column(type="string", nullable=false)
      */
     private $label;
-
-    /**
-     * @return mixed
-     */
-    public function getComponentNatures()
-    {
-        return $this->componentNatures;
-    }
-
-    /**
-     * @param mixed $componentNatures
-     * @return ComponentUnit
-     */
-    public function setComponentNatures($componentNatures): ComponentUnit
-    {
-        $this->componentNatures = $componentNatures;
-        return $this;
-    }
 
     /**
      * @return int

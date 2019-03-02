@@ -7,6 +7,7 @@
 namespace App\Entity\Quotes;
 
 use ApiPlatform\Core\Annotation\ApiResource;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
 
@@ -19,18 +20,13 @@ use Symfony\Component\Serializer\Annotation\Groups;
  */
 class QuotesAdministrativeState
 {
-
-    //////////////////////////////////
-    // RELATIONS
-    //////////////////////////////////
-
     //////////////////////////////////
     // PROPERTIES
     //////////////////////////////////
 
     /**
      * @var int Id of the administrative state.
-     * @Groups({"get"})
+     * @Groups({"get-quotes-administrative-state-history"})
      *
      * @ORM\Id
      * @ORM\GeneratedValue
@@ -40,7 +36,7 @@ class QuotesAdministrativeState
 
     /**
      * @var string Label of the administrative state.
-     * @Groups({"get"})
+     * @Groups({"get-quotes-administrative-state-history"})
      *
      * @ORM\Column(type="string", nullable=false)
      */
@@ -56,10 +52,12 @@ class QuotesAdministrativeState
 
     /**
      * @param int $id
+     * @return QuotesAdministrativeState
      */
-    public function setId(int $id): void
+    public function setId(int $id): QuotesAdministrativeState
     {
         $this->id = $id;
+        return $this;
     }
 
     /**
@@ -72,10 +70,12 @@ class QuotesAdministrativeState
 
     /**
      * @param string $label
+     * @return QuotesAdministrativeState
      */
-    public function setLabel(string $label): void
+    public function setLabel(string $label): QuotesAdministrativeState
     {
         $this->label = $label;
+        return $this;
     }
 
 }

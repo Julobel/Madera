@@ -1,4 +1,10 @@
 # Makefile
+run-serve:
+    php bin/console server:start
+
+serve-status:
+    php bin/console server:status
+
 fixture:
 	php bin/console doctrine:fixture:load
 	rm -rf var/cache/*
