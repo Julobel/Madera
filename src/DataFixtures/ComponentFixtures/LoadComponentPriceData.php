@@ -14,48 +14,33 @@ use App\Entity\Component\ComponentPrice;
 use Doctrine\Common\Persistence\ObjectManager;
 
 class LoadComponentPriceData extends MaderaFixtures{
-
-    /**
-     * Load data fixtures with the passed EntityManager
-     *
-     * @param ObjectManager $manager
+    /*
+     * Classe qui génère 100 prix récupérable avec la reference :
+     * 'component-price-price-' concaténer à un nombre entre 1 et 100
+     * les prix impair ont une date de fin ; pas les prix pair
      */
+    const PRICE = 'component-price-price-';
     public function load(ObjectManager $manager) {
-        $price1 = new ComponentPrice();
-        $price1->setValue(20.0)
-            ->setStartDate(\DateTime::createFromFormat('d/m/Y', '1/01/2019'))
-            ->setEndDate(\DateTime::createFromFormat('d/m/Y', '31/01/2019'));
-        $manager->persist($price1);
+        for ($i = 1;$i<100; $i=$i+2){
+            $price1 = new ComponentPrice();
+            $price1->setValue($i)
+                ->setStartDate(\DateTime::createFromFormat('d/m/Y', '1/01/2019'))
+                ->setEndDate(\DateTime::createFromFormat('d/m/Y', '31/01/2019'));
+            $manager->persist($price1);
 
-        $price2 = new ComponentPrice();
-        $price2->setValue(22.2)
-            ->setStartDate(\DateTime::createFromFormat('d/m/Y', '1/02/2019'));
-        $manager->persist($price2);
+            $price2 = new ComponentPrice();
+            $price2->setValue($i+1)
+                ->setStartDate(\DateTime::createFromFormat('d/m/Y', '1/02/2019'));
+            $manager->persist($price2);
 
-        $price3 = new ComponentPrice();
-        $price3->setValue(0.01)
-            ->setStartDate(\DateTime::createFromFormat('d/m/Y', '1/01/2019'))
-            ->setEndDate(\DateTime::createFromFormat('d/m/Y', '31/01/2019'));
-        $manager->persist($price3);
 
-        $price4 = new ComponentPrice();
-        $price4->setValue(0.02)
-            ->setStartDate(\DateTime::createFromFormat('d/m/Y', '1/02/2019'));
-        $manager->persist($price4);
-
+            $this->addReference(LoadComponentPriceData::PRICE.$i, $price1);
+            $this->addReference(LoadComponentPriceData::PRICE.($i+1), $price2);
+        }
         $manager->flush();
 
-        $this->addReference('component-price-price1', $price1);
-        $this->addReference('component-price-price2', $price2);
-        $this->addReference('component-price-price3', $price3);
-        $this->addReference('component-price-price4', $price4);
     }
 
-    /**
-     * Get the order of this fixture
-     *
-     * @return integer
-     */
     public function getOrder() {
         return MaderaFixtures::COMPONENT_PRICE;
     }

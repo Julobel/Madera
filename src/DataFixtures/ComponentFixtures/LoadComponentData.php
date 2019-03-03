@@ -20,26 +20,87 @@ class LoadComponentData extends MaderaFixtures{
             ->setSection(35)
             ->setThickness(20)
             ->setWidth(50)
-            ->setComponentNature($this->getReference('component-nature-montant'))
-            ->addPrice($this->getReference('component-price-price1'))
-            ->addPrice($this->getReference('component-price-price2'));
+            ->setComponentNature($this->getReference(LoadComponentNatureData::MONTANT))
+            ->addPrice($this->getReference(LoadComponentPriceData::PRICE.'1'))
+            ->addPrice($this->getReference(LoadComponentPriceData::PRICE.'2'));
         $manager ->persist($poutre);
 
-        $clou = new Component();
-        $clou ->setLabel("clou");
-        $clou ->setLength(0);
-        $clou ->setSection(0);
-        $clou ->setThickness(0);
-        $clou ->setWidth(0);
-        $clou ->setComponentNature($this->getReference('component-nature-elt-montage'))
-            ->addPrice($this->getReference('component-price-price3'))
-            ->addPrice($this->getReference('component-price-price4'));
-        $manager->persist($clou);
+        $sabot = new Component();
+        $sabot ->setLabel("Sabot métallique")
+            ->setLength(0)
+            ->setSection(0)
+            ->setThickness(0)
+            ->setWidth(0)
+            ->setComponentNature($this->getReference(LoadComponentNatureData::ELT_MONTAGE))
+            ->addPrice($this->getReference(LoadComponentPriceData::PRICE.'3'))
+            ->addPrice($this->getReference(LoadComponentPriceData::PRICE.'4'));
+        $manager->persist($sabot);
+
+
+        $ba13 = new Component();
+        $ba13 ->setLabel("Plaque de plâtre")
+            ->setLength(0)
+            ->setSection(0)
+            ->setThickness(130)
+            ->setWidth(0)
+            ->setComponentNature($this->getReference(LoadComponentNatureData::PANNEAUX))
+            ->setComponentQuality($this->getReference(LoadComponentInteriorFinishData::PLATRE))
+            ->addPrice($this->getReference(LoadComponentPriceData::PRICE.'5'))
+            ->addPrice($this->getReference(LoadComponentPriceData::PRICE.'6'));
+        $manager->persist($sabot);
+
+        $tuile = new Component();
+        $tuile->setLabel("Tuile Méridionale")
+            ->setLength(500)
+            ->setSection(0)
+            ->setThickness(0)
+            ->setWidth(300)
+            ->setComponentNature($this->getReference(LoadComponentNatureData::COUVERTURE))
+            ->setComponentQuality($this->getReference(LoadComponentCoveringData::TUILES))
+            ->addPrice($this->getReference(LoadComponentPriceData::PRICE.'7'))
+            ->addPrice($this->getReference(LoadComponentPriceData::PRICE.'8'));
+        $manager->persist($tuile);
+
+
+        $tuileCanal = new Component();
+        $tuileCanal->setLabel("Tuile Canal")
+            ->setLength(500)
+            ->setSection(0)
+            ->setThickness(0)
+            ->setWidth(150)
+            ->setComponentNature($this->getReference(LoadComponentNatureData::COUVERTURE))
+            ->setComponentQuality($this->getReference(LoadComponentCoveringData::TUILES))
+            ->addPrice($this->getReference(LoadComponentPriceData::PRICE.'9'))
+            ->addPrice($this->getReference(LoadComponentPriceData::PRICE.'10'));
+        $manager->persist($tuileCanal);
+
+
+        $ardoisePetite = new Component();
+        $ardoisePetite->setLabel("Ardoise Petite")
+            ->setLength(100)
+            ->setSection(0)
+            ->setThickness(0)
+            ->setWidth(100)
+            ->setComponentNature($this->getReference(LoadComponentNatureData::COUVERTURE))
+            ->setComponentQuality($this->getReference(LoadComponentCoveringData::ARDOISES))
+            ->addPrice($this->getReference(LoadComponentPriceData::PRICE.'11'))
+            ->addPrice($this->getReference(LoadComponentPriceData::PRICE.'12'));
+        $manager->persist($ardoisePetite);
+
+        $ardoiseGrande = new Component();
+        $ardoiseGrande->setLabel("Ardoise Grande")
+            ->setLength(300)
+            ->setSection(0)
+            ->setThickness(0)
+            ->setWidth(300)
+            ->setComponentNature($this->getReference(LoadComponentNatureData::COUVERTURE))
+            ->setComponentQuality($this->getReference(LoadComponentCoveringData::ARDOISES))
+            ->addPrice($this->getReference(LoadComponentPriceData::PRICE.'13'))
+            ->addPrice($this->getReference(LoadComponentPriceData::PRICE.'14'));
+        $manager->persist($ardoiseGrande);
 
         $manager->flush();
 
-        $this->addReference('component-poutre', $poutre);
-        $this->addReference('component-clou', $clou);
     }
 
     /**
