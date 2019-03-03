@@ -24,7 +24,7 @@ class LoadAccountingTVAData extends MaderaFixtures{
         $tva20->setLabel("20%")
             ->setValue(0.2)
             ->setApplicable(true);
-        $manager ->persist($tva196);
+        $manager ->persist($tva20);
 
         $manager->flush();
 

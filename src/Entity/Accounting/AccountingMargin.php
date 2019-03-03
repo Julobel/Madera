@@ -1,13 +1,10 @@
 <?php
-/**
- * Created by Jules Aubel
- * Date: 15/02/19
- */
 
 namespace App\Entity\Accounting;
 
 use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * Class AccountingMargin
@@ -25,6 +22,7 @@ class AccountingMargin
 
     /**
      * @var int AccountingMargin Id
+     * @Groups({"get-accounting-value-rate", "post-accounting-value-rate"})
      *
      * @ORM\Id
      * @ORM\GeneratedValue
@@ -34,6 +32,7 @@ class AccountingMargin
 
     /**
      * @var string AccountingMargin Label
+     * @Groups({"get-accounting-value-rate", "post-accounting-value-rate"})
      *
      * @ORM\Column(type="string", nullable=false)
      */
