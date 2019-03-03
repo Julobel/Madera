@@ -26,7 +26,7 @@ class ComponentPrice
 
     /**
      *
-     * @ORM\ManyToOne(targetEntity="Component", inversedBy="componentPrices")
+     * @ORM\ManyToOne(targetEntity="Component", inversedBy="componentPrices", cascade={"persist"})
      * @ORM\JoinColumn(name="component_component_id", referencedColumnName="id", onDelete="RESTRICT")
      */
     private $component;

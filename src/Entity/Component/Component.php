@@ -1,8 +1,4 @@
 <?php
-/**
- * Created by Jules Aubel
- * Date: 15/02/19
- */
 
 namespace App\Entity\Component;
 
@@ -42,6 +38,15 @@ class Component
      * @ORM\JoinColumn(name="component_nature_id", referencedColumnName="id", onDelete="RESTRICT")
      */
     private $componentNature;
+
+    /**
+     * @var ComponentQuality $componentQuality
+     * @Groups({"get-component-component", "post-component-component"})
+     *
+     * @ORM\ManyToOne(targetEntity="ComponentQuality")
+     * @ORM\JoinColumn(name="component_quality_id", referencedColumnName="id", onDelete="RESTRICT")
+     */
+    private $componentQuality;
 
     /**
      * @var Collection $componentPrices
@@ -253,5 +258,22 @@ class Component
         $this->componentNature = $componentNature;
         return $this;
     }
+
+    /**
+     * @return ComponentQuality
+     */
+    public function getComponentQuality(): ?ComponentQuality {
+        return $this->componentQuality;
+    }
+
+    /**
+     * @return Component
+     * @param ComponentQuality $componentQuality
+     */
+    public function setComponentQuality(ComponentQuality $componentQuality): Component {
+        $this->componentQuality = $componentQuality;
+        return $this;
+    }
+
 
 }
