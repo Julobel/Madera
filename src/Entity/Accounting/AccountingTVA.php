@@ -1,8 +1,4 @@
 <?php
-/**
- * Created by Jules Aubel
- * Date: 15/02/19
- */
 
 namespace App\Entity\Accounting;
 
@@ -31,6 +27,13 @@ class AccountingTVA
      * @ORM\Column(type="integer")
      */
     private $id;
+
+    /**
+     * @var float AccountingTVA Value
+     *
+     * @ORM\Column(type="float", nullable=false)
+     */
+    private $value;
 
     /**
      * @var string AccountingTVA Label
@@ -65,6 +68,23 @@ class AccountingTVA
     }
 
     /**
+     * @return float
+     */
+    public function getValue(): float {
+        return $this->value;
+    }
+
+    /**
+     * @param float $value
+     * @return AccountingTVA
+     */
+    public function setValue(float $value): AccountingTVA {
+        $this->value = $value;
+        return $this;
+    }
+
+
+    /**
      * @return string
      */
     public function getLabel(): string
@@ -83,6 +103,8 @@ class AccountingTVA
     }
 
     /**
+     * Return wehther the rate is actually Applicable.
+     * Useful when creating a new Quote
      * @return bool
      */
     public function isApplicable(): bool

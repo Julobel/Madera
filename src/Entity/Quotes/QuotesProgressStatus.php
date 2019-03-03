@@ -8,6 +8,7 @@ namespace App\Entity\Quotes;
 
 use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * Class QuotesAdministrativeState
@@ -25,6 +26,7 @@ class QuotesProgressStatus
 
     /**
      * @var int Id of the progress status.
+     * @Groups({"get-quotes-progress-status-history"})
      *
      * @ORM\Id
      * @ORM\GeneratedValue
@@ -34,6 +36,7 @@ class QuotesProgressStatus
 
     /**
      * @var string Label of the progress status.
+     * @Groups({"get-quotes-progress-status-history"})
      *
      * @ORM\Column(type="string", nullable=false)
      */
@@ -41,6 +44,7 @@ class QuotesProgressStatus
 
     /**
      * @var float Percentage payment of the progress status.
+     * @Groups({"get-quotes-progress-status-history"})
      *
      * @ORM\Column(type="float", nullable=false)
      */
