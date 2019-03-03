@@ -1,23 +1,56 @@
 <?php
-/**
- * Created by Jules Aubel
- * Date: 15/02/19
- */
 
 namespace App\Entity\Accounting;
 
 use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * Class AccountingValueRate
  * @package App\Entity\Accounting
  * @ORM\Entity
  * @ORM\Table(name="ACCOUNTING_value_rate")
- * @ApiResource()
+ * @ApiResource(
+ *     collectionOperations={
+ *          "GET"={
+ *             "normalization_context"={"groups"={"get-accounting-value-rate"}}
+ *           },
+ *          "POST"={
+ *             "denormalization_context"={"groups"={"post-accounting-value-rate"}}
+ *          }
+ *     },
+ * )
  */
 class AccountingValueRate
 {
+    //////////////////////////////////
+    // RELATIONS
+    //////////////////////////////////
+
+    /**
+     * @Groups({"get-accounting-value-rate", "post-accounting-value-rate"})
+     *
+     * @ORM\ManyToOne(targetEntity="AccountingMargin")
+     * @ORM\JoinColumn(name="accounting_margin_id", referencedColumnName="id", onDelete="RESTRICT")
+     */
+    private $margin;
+
+    /**
+     * @return AccountingMargin
+     */
+    public function getMargin() {
+        return $this->margin;
+    }
+
+    /**
+     * @param AccountingMargin $margin
+     * @return AccountingValueRate
+     */
+    public function setMargin(AccountingMargin $margin): AccountingValueRate{
+        $this->margin = $margin;
+        return $this;
+    }
 
     //////////////////////////////////
     // PROPERTIES
@@ -25,6 +58,7 @@ class AccountingValueRate
 
     /**
      * @var int AccountingValueRate Id
+     * @Groups({"get-accounting-value-rate", "post-accounting-value-rate"})
      *
      * @ORM\Id
      * @ORM\GeneratedValue
@@ -34,6 +68,7 @@ class AccountingValueRate
 
     /**
      * @var float AccountingValueRate Value
+     * @Groups({"get-accounting-value-rate", "post-accounting-value-rate"})
      *
      * @ORM\Column(type="float", nullable=false)
      */
@@ -41,6 +76,7 @@ class AccountingValueRate
 
     /**
      * @var \DateTime AccountingValueRate start date
+     * @Groups({"get-accounting-value-rate", "post-accounting-value-rate"})
      *
      * @ORM\Column(type="datetime")
      */
@@ -48,8 +84,9 @@ class AccountingValueRate
 
     /**
      * @var \DateTime AccountingValueRate end date
+     * @Groups({"get-accounting-value-rate", "post-accounting-value-rate"})
      *
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="datetime", nullable=true)
      */
     private $endDate;
 
@@ -110,7 +147,7 @@ class AccountingValueRate
     /**
      * @return \DateTime
      */
-    public function getEndDate(): \DateTime
+    public function getEndDate(): ?\DateTime
     {
         return $this->endDate;
     }
