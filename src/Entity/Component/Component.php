@@ -1,23 +1,84 @@
 <?php
-/**
- * Created by Jules Aubel
- * Date: 15/02/19
- */
 
 namespace App\Entity\Component;
 
 use ApiPlatform\Core\Annotation\ApiResource;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * Class Component
  * @package App\Entity\Component
  * @ORM\Entity
  * @ORM\Table(name="COMPONENT_component")
- * @ApiResource()
+ * @ApiResource(
+ *     collectionOperations={
+ *          "GET"={
+ *             "normalization_context"={"groups"={"get-component-component"}}
+ *           },
+ *          "POST"={
+ *             "denormalization_context"={"groups"={"post-component-component"}}
+ *          }
+ *     },
+ * )
  */
 class Component
 {
+    //////////////////////////////////
+    // RELATIONS
+    //////////////////////////////////
+
+    /**
+     * @var ComponentNature $componentNature
+     * @Groups({"get-component-component", "post-component-component"})
+     *
+     * @ORM\ManyToOne(targetEntity="ComponentNature")
+     * @ORM\JoinColumn(name="component_nature_id", referencedColumnName="id", onDelete="RESTRICT")
+     */
+    private $componentNature;
+
+    /**
+     * @var ComponentQuality $componentQuality
+     * @Groups({"get-component-component", "post-component-component"})
+     *
+     * @ORM\ManyToOne(targetEntity="ComponentQuality")
+     * @ORM\JoinColumn(name="component_quality_id", referencedColumnName="id", onDelete="RESTRICT")
+     */
+    private $componentQuality;
+
+    /**
+     * @var Collection $componentPrices
+     * @Groups({"get-component-component", "post-component-component"})
+     *
+     * @ORM\OneToMany(targetEntity="ComponentPrice", mappedBy="component", cascade={"persist"})
+     */
+    private $componentPrices;
+
+    public function __construct() {
+        $this->componentPrices = new ArrayCollection();
+    }
+
+    /**
+     * @return Collection
+     */
+    public function getComponentPrices(): Collection {
+        return $this->componentPrices;
+    }
+
+    /**
+     * @param ComponentPrice $price
+     * @return Component
+     */
+    public function addPrice(ComponentPrice $price) {
+        // Si l'objet fait déjà partie de la collection on ne l'ajoute pas
+        if (!$this->componentPrices->contains($price)) {
+            $this->componentPrices->add($price);
+        }
+        $price->setComponent($this);
+        return $this;
+    }
 
     //////////////////////////////////
     // PROPERTIES
@@ -25,6 +86,7 @@ class Component
 
     /**
      * @var int Component Id
+     * @Groups({"get-component-component", "post-component-component"})
      *
      * @ORM\Id
      * @ORM\GeneratedValue
@@ -34,6 +96,7 @@ class Component
 
     /**
      * @var string Component Label
+     * @Groups({"get-component-component", "post-component-component"})
      *
      * @ORM\Column(type="string", nullable=false)
      */
@@ -41,6 +104,7 @@ class Component
 
     /**
      * @var integer Component Section
+     * @Groups({"get-component-component", "post-component-component"})
      *
      * @ORM\Column(type="integer")
      */
@@ -48,6 +112,7 @@ class Component
 
     /**
      * @var integer Component Thickness
+     * @Groups({"get-component-component", "post-component-component"})
      *
      * @ORM\Column(type="integer")
      */
@@ -55,6 +120,7 @@ class Component
 
     /**
      * @var integer Component Length
+     * @Groups({"get-component-component", "post-component-component"})
      *
      * @ORM\Column(type="integer")
      */
@@ -62,6 +128,7 @@ class Component
 
     /**
      * @var integer Component Width
+     * @Groups({"get-component-component", "post-component-component"})
      *
      * @ORM\Column(type="integer")
      */
@@ -174,5 +241,39 @@ class Component
         $this->width = $width;
         return $this;
     }
+    /**
+     * @return ComponentNature
+     */
+    public function getComponentNature()
+    {
+        return $this->componentNature;
+    }
+
+    /**
+     * @param ComponentNature $componentNature
+     * @return Component
+     */
+    public function setComponentNature($componentNature): Component
+    {
+        $this->componentNature = $componentNature;
+        return $this;
+    }
+
+    /**
+     * @return ComponentQuality
+     */
+    public function getComponentQuality(): ?ComponentQuality {
+        return $this->componentQuality;
+    }
+
+    /**
+     * @return Component
+     * @param ComponentQuality $componentQuality
+     */
+    public function setComponentQuality(ComponentQuality $componentQuality): Component {
+        $this->componentQuality = $componentQuality;
+        return $this;
+    }
+
 
 }

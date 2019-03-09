@@ -21,8 +21,24 @@ abstract class MaderaFixtures extends Fixture implements OrderedFixtureInterface
     const COMPONENT_UNIT = 1;
     const COMPONENT_NATURE = MaderaFixtures::COMPONENT_UNIT+1;
     const COMPONENT_PRICE = 1;
-    const COMPONENT = MaderaFixtures::COMPONENT_NATURE+MaderaFixtures::COMPONENT_PRICE;
+    const COMPONENT_QUALITY = 1;
+    const COMPONENT = MaderaFixtures::COMPONENT_NATURE
+                    + MaderaFixtures::COMPONENT_PRICE
+                    + MaderaFixtures::COMPONENT_QUALITY;
 
     //MODULE PACKAGE
     const MODULE = MaderaFixtures::COMPONENT+1;
+
+    //ACCOUNTING PACKAGE
+    const ACCOUNTING_TVA = 1;
+    const ACCOUNTING_MARGIN = 1;
+    const ACCOUNTING_VALUE_RATE = MaderaFixtures::ACCOUNTING_MARGIN + 1;
+    //ACTOR PACKAGE
+
+    //PROJECT PACKAGE
+
+    //QUOTES PACKAGE
+    const QUOTES = MaderaFixtures::ACCOUNTING_TVA + 1;
+
+    //RANGE PACKAGE
 }

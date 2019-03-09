@@ -1,8 +1,4 @@
 <?php
-/**
- * Created by Jules Aubel
- * Date: 15/02/19
- */
 
 namespace App\Entity\Component;
 
@@ -13,66 +9,9 @@ use Doctrine\ORM\Mapping as ORM;
  * Class ComponentExteriorFinish
  * @package App\Entity\Component
  * @ORM\Entity
- * @ORM\Table(name="COMPONENT_finish_exterior")
  * @ApiResource()
  */
-class ComponentExteriorFinish
+class ComponentExteriorFinish extends ComponentQuality
 {
-
-    //////////////////////////////////
-    // PROPERTIES
-    //////////////////////////////////
-
-    /**
-     * @var int ComponentExteriorFinish Id
-     *
-     * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
-     */
-    private $id;
-
-    /**
-     * @var string ComponentExteriorFinish Label
-     *
-     * @ORM\Column(type="string", nullable=false)
-     */
-    private $label;
-
-    /**
-     * @return int
-     */
-    public function getId(): int
-    {
-        return $this->id;
-    }
-
-    /**
-     * @param int $id
-     * @return ComponentExteriorFinish
-     */
-    public function setId(int $id): ComponentExteriorFinish
-    {
-        $this->id = $id;
-        return $this;
-    }
-
-    /**
-     * @return string
-     */
-    public function getLabel(): string
-    {
-        return $this->label;
-    }
-
-    /**
-     * @param string $label
-     * @return ComponentExteriorFinish
-     */
-    public function setLabel(string $label): ComponentExteriorFinish
-    {
-        $this->label = $label;
-        return $this;
-    }
 
 }

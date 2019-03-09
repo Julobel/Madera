@@ -8,6 +8,7 @@ namespace App\Entity\Component;
 
 use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * Class ComponentPrice
@@ -20,11 +21,40 @@ class ComponentPrice
 {
 
     //////////////////////////////////
+    // RELATIONS
+    //////////////////////////////////
+
+    /**
+     *
+     * @ORM\ManyToOne(targetEntity="Component", inversedBy="componentPrices", cascade={"persist"})
+     * @ORM\JoinColumn(name="component_component_id", referencedColumnName="id", onDelete="RESTRICT")
+     */
+    private $component;
+
+    /**
+     * @return Component
+     */
+    public function getComponent()
+    {
+        return $this->component;
+    }
+
+    /**
+     * @param Component $component
+     * @return ComponentPrice
+     */
+    public function setComponent($component): ComponentPrice
+    {
+        $this->component = $component;
+        return $this;
+    }
+    //////////////////////////////////
     // PROPERTIES
     //////////////////////////////////
 
     /**
      * @var int ComponentPrice Id
+     * @Groups({"get-component-component", "post-component-component"})
      *
      * @ORM\Id
      * @ORM\GeneratedValue
@@ -34,6 +64,7 @@ class ComponentPrice
 
     /**
      * @var float ComponentPrice Value
+     * @Groups({"get-component-component", "post-component-component"})
      *
      * @ORM\Column(type="float", nullable=false)
      */
@@ -41,15 +72,17 @@ class ComponentPrice
 
     /**
      * @var \DateTime ComponentPrice start date
+     * @Groups({"get-component-component", "post-component-component"})
      *
      * @ORM\Column(type="datetime")
      */
     private $startDate;
 
     /**
-     * @var \DateTime ComponentPrice end date
+     * @var mixed ComponentPrice end date
+     * @Groups({"get-component-component", "post-component-component"})
      *
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="datetime", nullable=true)
      */
     private $endDate;
 
@@ -110,7 +143,7 @@ class ComponentPrice
     /**
      * @return \DateTime
      */
-    public function getEndDate(): \DateTime
+    public function getEndDate(): ?\DateTime
     {
         return $this->endDate;
     }
