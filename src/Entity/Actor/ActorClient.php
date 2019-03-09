@@ -8,6 +8,7 @@ namespace App\Entity\Actor;
 
 use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * Class ActorClient
@@ -25,6 +26,7 @@ class ActorClient
 
     /**
      * @var int Id of the client
+     * @Groups({"get-project", "get-quotes"})
      *
      * @ORM\Id
      * @ORM\GeneratedValue
@@ -34,6 +36,7 @@ class ActorClient
 
     /**
      * @var string First name of the client
+     * @Groups({"get-project", "get-quotes"})
      *
      * @ORM\Column(type="string", nullable=false)
      */
@@ -41,6 +44,7 @@ class ActorClient
 
     /**
      * @var string Last name of the client
+     * @Groups({"get-project", "get-quotes"})
      *
      * @ORM\Column(type="string", nullable=false)
      */
@@ -48,6 +52,7 @@ class ActorClient
 
     /**
      * @var integer Street number
+     * @Groups({"get-project", "get-quotes"})
      *
      * @ORM\Column(type="integer", nullable=false)
      */
@@ -55,6 +60,7 @@ class ActorClient
 
     /**
      * @var string
+     * @Groups({"get-project", "get-quotes"})
      *
      * @ORM\Column(type="string", nullable=false)
      */
@@ -62,6 +68,7 @@ class ActorClient
 
     /**
      * @var string
+     * @Groups({"get-project", "get-quotes"})
      *
      * @ORM\Column(type="string", nullable=false)
      */
@@ -69,6 +76,7 @@ class ActorClient
 
     /**
      * @var integer Postal cod eof the client
+     * @Groups({"get-project", "get-quotes"})
      *
      * @ORM\Column(type="integer", nullable=false)
      */
@@ -76,6 +84,7 @@ class ActorClient
 
     /**
      * @var string City of the client
+     * @Groups({"get-project", "get-quotes"})
      *
      * @ORM\Column(type="string", nullable=false)
      */
@@ -83,6 +92,7 @@ class ActorClient
 
     /**
      * @var string State of the client
+     * @Groups({"get-project", "get-quotes"})
      *
      * @ORM\Column(type="string", nullable=false)
      */
@@ -90,6 +100,7 @@ class ActorClient
 
     /**
      * @var integer Phone number of the client
+     * @Groups({"get-project", "get-quotes"})
      *
      * @ORM\Column(type="integer", nullable=false)
      */
@@ -97,6 +108,7 @@ class ActorClient
 
     /**
      * @var string Email of the client
+     * @Groups({"get-project", "get-quotes"})
      *
      * @ORM\Column(type="string", nullable=false)
      */

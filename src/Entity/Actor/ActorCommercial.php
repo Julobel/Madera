@@ -8,6 +8,7 @@ namespace App\Entity\Actor;
 
 use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * Class ActorCommercial
@@ -25,6 +26,7 @@ class ActorCommercial
 
     /**
      * @var int Id of the commercial
+     * @Groups({"get-quotes"})
      *
      * @ORM\Id
      * @ORM\GeneratedValue
@@ -34,6 +36,7 @@ class ActorCommercial
 
     /**
      * @var string FirstName of the commercial
+     * @Groups({"get-quotes"})
      *
      * @ORM\Column(type="string", nullable=false)
      */
@@ -41,6 +44,7 @@ class ActorCommercial
 
     /**
      * @var string LastName of the commercial
+     * @Groups({"get-quotes"})
      *
      * @ORM\Column(type="string", nullable=false)
      */
@@ -48,6 +52,7 @@ class ActorCommercial
 
     /**
      * @var string Email of the commercial
+     * @Groups({"get-quotes"})
      *
      * @ORM\Column(type="string", nullable=false)
      */
@@ -55,6 +60,7 @@ class ActorCommercial
 
     /**
      * @var string Phone number of the commercial
+     * @Groups({"get-quotes"})
      *
      * @ORM\Column(type="string", nullable=false)
      */
