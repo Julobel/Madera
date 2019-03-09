@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by IntelliJ IDEA.
- * User: JB
- * Date: 03/03/2019
- * Time: 19:06
- */
 
 namespace App\DataFixtures\ComponentFixtures;
 

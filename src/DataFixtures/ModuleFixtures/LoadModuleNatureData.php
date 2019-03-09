@@ -1,58 +1,59 @@
 <?php
 
-namespace App\DataFixtures\ComponentFixtures;
+namespace App\DataFixtures\ModuleFixtures;
 
 use App\DataFixtures\MaderaFixtures;
-use App\Entity\Component\ComponentNature;
+use App\Entity\Module\ModuleNature;
 use Doctrine\Common\Persistence\ObjectManager;
 
-class LoadComponentNatureData extends MaderaFixtures{
-    const MONTANT = 'component-nature-montant';
-    const ELT_MONTAGE = 'component-nature-elt-montage';
-    const ISOLATION = 'component-nature-isolation';
-    const PANNEAUX = 'component-nature-panneaux';
-    const PLANCHER = 'component-nature-plancher';
-    const COUVERTURE = 'component-nature-couverture';
+class LoadModuleNatureData extends MaderaFixtures{
+
+    const MURS_EXTERIEURS = 'module-nature-murs-ext';
+    const CLOISONS_INTERIEURS = 'module-nature-cloisons-int';
+    const PLANCHER_DALLE = 'module-nature-plancher-dalle';
+    const PLANCHER_PORTEUR = 'module-nature-plancher-porteur';
+    const FERME = 'module-nature-ferme';
+    const TOIT = 'module-nature-toit';
 
     public function load(ObjectManager $manager) {
-        $montant = new ComponentNature();
-        $montant->setLabel('Montant')
-            ->setComponentUnit($this->getReference(LoadComponentUnitData::LONGUEUR));
-        $manager ->persist($montant);
+        $mursExt = new ModuleNature();
+        $mursExt->setLabel('Murs extérieurs')
+            ->setModuleUnit($this->getReference(LoadModuleUnitData::METRE_LINEAIRE));
+        $manager ->persist($mursExt);
+        $this->addReference(LoadModuleNatureData::MURS_EXTERIEURS, $mursExt);
 
-        $eltMontage = new ComponentNature();
-        $eltMontage->setLabel('Element de Montage')
-            ->setComponentUnit($this->getReference(LoadComponentUnitData::PIECE));
-        $manager->persist($eltMontage);
+        $cloisonsInt = new ModuleNature();
+        $cloisonsInt->setLabel('Cloisons intérieures')
+            ->setModuleUnit($this->getReference(LoadModuleUnitData::METRE_LINEAIRE));
+        $manager->persist($cloisonsInt);
+        $this->addReference(LoadModuleNatureData::CLOISONS_INTERIEURS, $cloisonsInt);
 
-        $isolation = new ComponentNature();
-        $isolation->setLabel('Panneaux d’isolation et pare-pluie')
-            ->setComponentUnit($this->getReference(LoadComponentUnitData::SURFACE));
-        $manager->persist($isolation);
+        $plancherDalle = new ModuleNature();
+        $plancherDalle->setLabel('Plancher sur dalle')
+            ->setModuleUnit($this->getReference(LoadModuleUnitData::METRE_CARRE));
+        $manager->persist($plancherDalle);
+        $this->addReference(LoadModuleNatureData::PLANCHER_DALLE, $plancherDalle);
 
-        $panneaux = new ComponentNature();
-        $panneaux->setLabel('Panneaux intermédiaires et de couverture')
-            ->setComponentUnit($this->getReference(LoadComponentUnitData::SURFACE));
-        $manager->persist($panneaux);
+        $plancherPorteur = new ModuleNature();
+        $plancherPorteur->setLabel('Plancher porteur')
+            ->setModuleUnit($this->getReference(LoadModuleUnitData::METRE_CARRE));
+        $manager->persist($plancherPorteur);
+        $this->addReference(LoadModuleNatureData::PLANCHER_PORTEUR, $plancherPorteur);
 
-        $plancher = new ComponentNature();
-        $plancher->setLabel('Plancher')
-            ->setComponentUnit($this->getReference(LoadComponentUnitData::SURFACE));
-        $manager->persist($plancher);
+        $ferme = new ModuleNature();
+        $ferme->setLabel('Fermes de charpente')
+            ->setModuleUnit($this->getReference(LoadModuleUnitData::UNITE));
+        $manager->persist($ferme);
+        $this->addReference(LoadModuleNatureData::FERME, $ferme);
 
-        $couverture = new ComponentNature();
-        $couverture->setLabel('Couverture')
-            ->setComponentUnit($this->getReference(LoadComponentUnitData::SURFACE));
-        $manager->persist($couverture);
+        $toit = new ModuleNature();
+        $toit->setLabel('Couverture (toit)')
+            ->setModuleUnit($this->getReference(LoadModuleUnitData::METRE_CARRE));
+        $manager->persist($toit);
+        $this->addReference(LoadModuleNatureData::TOIT, $toit);
 
         $manager->flush();
 
-        $this->addReference(LoadComponentNatureData::MONTANT, $montant);
-        $this->addReference(LoadComponentNatureData::ELT_MONTAGE, $eltMontage);
-        $this->addReference(LoadComponentNatureData::ISOLATION, $isolation);
-        $this->addReference(LoadComponentNatureData::PANNEAUX, $panneaux);
-        $this->addReference(LoadComponentNatureData::PLANCHER, $plancher);
-        $this->addReference(LoadComponentNatureData::COUVERTURE, $couverture);
     }
 
     /**
@@ -61,6 +62,6 @@ class LoadComponentNatureData extends MaderaFixtures{
      * @return integer
      */
     public function getOrder() {
-        return MaderaFixtures::COMPONENT_NATURE;
+        return MaderaFixtures::MODULE_NATURE;
     }
 }

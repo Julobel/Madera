@@ -3,6 +3,7 @@
 namespace App\Entity\Module;
 
 use ApiPlatform\Core\Annotation\ApiResource;
+use App\Entity\Component\Component;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -14,6 +15,23 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class ModuleStructure
 {
+    //////////////////////////////////
+    // RELATIONS
+    //////////////////////////////////
+
+    /**
+     * @var Module $module
+     * @ORM\ManyToOne(targetEntity="Module", inversedBy="structureComponents")
+     * @ORM\JoinColumn(name="module_id", referencedColumnName="id", nullable=FALSE)
+     */
+    protected $module;
+
+    /**
+     * @var Component $component
+     * @ORM\ManyToOne(targetEntity="\App\Entity\Component\Component", inversedBy="structureOf")
+     * @ORM\JoinColumn(name="component_id", referencedColumnName="id", nullable=FALSE)
+     */
+    protected $component;
 
     //////////////////////////////////
     // PROPERTIES
@@ -27,18 +45,6 @@ class ModuleStructure
      * @ORM\Column(type="integer")
      */
     private $id;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="Module", inversedBy="components")
-     * @ORM\JoinColumn(name="module_id", referencedColumnName="id", nullable=FALSE)
-     */
-    protected $module;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="\App\Entity\Component\Component", inversedBy="modules")
-     * @ORM\JoinColumn(name="company_id", referencedColumnName="id", nullable=FALSE)
-     */
-    protected $component;
 
     /**
      * @var float Component quantity
@@ -105,6 +111,38 @@ class ModuleStructure
     public function setIsProportional(bool $isProportional): ModuleStructure
     {
         $this->isProportional = $isProportional;
+        return $this;
+    }
+
+    /**
+     * @return Module
+     */
+    public function getModule() {
+        return $this->module;
+    }
+
+    /**
+     * @param Module $module
+     * @return ModuleStructure
+     */
+    public function setModule(Module $module): ModuleStructure {
+        $this->module = $module;
+        return $this;
+    }
+
+    /**
+     * @return Component
+     */
+    public function getComponent() {
+        return $this->component;
+    }
+
+    /**
+     * @param Component $component
+     * @return ModuleStructure
+     */
+    public function setComponent(Component $component): ModuleStructure{
+        $this->component = $component;
         return $this;
     }
 

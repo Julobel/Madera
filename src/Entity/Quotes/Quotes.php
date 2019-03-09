@@ -37,7 +37,7 @@ class Quotes
     /**
      * @Groups({"get-quotes", "post-quotes"})
      *
-     * @ORM\OneToMany(targetEntity="QuotesLine")
+     * @ORM\OneToMany(targetEntity="QuotesLine", mappedBy="quotes", cascade={"persist"}))
      * @ORM\JoinColumn(name="quotes_line_id", referencedColumnName="id", onDelete="RESTRICT")
      */
      private $quotesLine;

@@ -1,35 +1,36 @@
 <?php
 
-namespace App\DataFixtures\ComponentFixtures;
-
+namespace App\DataFixtures\ModuleFixtures;
 
 use App\DataFixtures\MaderaFixtures;
-use App\Entity\Component\ComponentUnit;
+use App\Entity\Module\ModuleUnit;
 use Doctrine\Common\Persistence\ObjectManager;
 
-class LoadComponentUnitData extends MaderaFixtures{
-    const LONGUEUR = 'component-unit-lg';
-    const PIECE = 'component-unit-piece';
-    const SURFACE = 'component-unit-surface';
+class LoadModuleUnitData extends MaderaFixtures{
+
+    const METRE_LINEAIRE = 'module-unit-lineaire';
+    const METRE_CARRE = 'module-unit-carre';
+    const UNITE = 'module-unit-unite';
+
     public function load(ObjectManager $manager) {
 
-        $lgUnit = new ComponentUnit();
-        $lgUnit->setLabel('Longueur en mm');
-        $manager ->persist($lgUnit);
+        $metreLineaire = new ModuleUnit();
+        $metreLineaire->setLabel('M linéaire');
+        $manager ->persist($metreLineaire);
+        $this->addReference(LoadModuleUnitData::METRE_LINEAIRE, $metreLineaire);
 
-        $pieceUnit = new ComponentUnit();
-        $pieceUnit->setLabel('Pièce');
-        $manager->persist($pieceUnit);
+        $metreCarre = new ModuleUnit();
+        $metreCarre->setLabel('M 2');
+        $manager->persist($metreCarre);
+        $this->addReference(LoadModuleUnitData::METRE_CARRE, $metreCarre);
 
-        $surface = new ComponentUnit();
-        $surface->setLabel('Surface en M2');
-        $manager->persist($surface);
+        $unite = new ModuleUnit();
+        $unite->setLabel('Unité');
+        $manager->persist($unite);
+        $this->addReference(LoadModuleUnitData::UNITE, $unite);
 
         $manager->flush();
 
-        $this->addReference(LoadComponentUnitData::LONGUEUR, $lgUnit);
-        $this->addReference(LoadComponentUnitData::PIECE, $pieceUnit);
-        $this->addReference(LoadComponentUnitData::SURFACE, $surface);
     }
 
     /**
@@ -38,6 +39,6 @@ class LoadComponentUnitData extends MaderaFixtures{
      * @return integer
      */
     public function getOrder() {
-        return MaderaFixtures::COMPONENT_UNIT;
+        return MaderaFixtures::MODULE_UNIT;
     }
 }
