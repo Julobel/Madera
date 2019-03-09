@@ -35,9 +35,10 @@ class ComponentNature
 
     /**
      * @Groups({"get-component-nature", "post-component-nature"})
+     * @Groups({"get-component-component", "post-component-component"})
      *
      * @ORM\ManyToOne(targetEntity="ComponentUnit")
-     * @ORM\JoinColumn(name="component_unit_id", referencedColumnName="id", onDelete="CASCADE")
+     * @ORM\JoinColumn(name="component_unit_id", referencedColumnName="id", onDelete="RESTRICT")
      */
     private $componentUnit;
 
@@ -64,7 +65,7 @@ class ComponentNature
     private $label;
 
     /**
-     * @return mixed
+     * @return ComponentUnit
      */
     public function getComponentUnit()
     {

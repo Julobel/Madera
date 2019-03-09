@@ -4,19 +4,19 @@
  * Date: 15/02/19
  */
 
-namespace App\Entity\Range;
+namespace App\Entity\Margin;
 
 use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Class Range
- * @package App\Entity\Range
+ * Class Margin
+ * @package App\Entity\Margin
  * @ORM\Entity
- * @ORM\Table(name="RANGE_range")
+ * @ORM\Table(name="MARGIN_margin")
  * @ApiResource()
  */
-class Range
+class Margin
 {
 
     //////////////////////////////////
@@ -24,7 +24,7 @@ class Range
     //////////////////////////////////
 
     /**
-     * @var int Range Id
+     * @var int Margin Id
      *
      * @ORM\Id
      * @ORM\GeneratedValue
@@ -33,7 +33,7 @@ class Range
     private $id;
 
     /**
-     * @var string Range Label
+     * @var string Margin Label
      *
      * @ORM\Column(type="string", nullable=false)
      */
@@ -49,9 +49,9 @@ class Range
 
     /**
      * @param int $id
-     * @return Range
+     * @return Margin
      */
-    public function setId(int $id): Range
+    public function setId(int $id): Margin
     {
         $this->id = $id;
         return $this;
@@ -67,9 +67,9 @@ class Range
 
     /**
      * @param string $label
-     * @return Range
+     * @return Margin
      */
-    public function setLabel(string $label): Range
+    public function setLabel(string $label): Margin
     {
         $this->label = $label;
         return $this;

@@ -8,12 +8,9 @@ use App\Entity\Component\ComponentUnit;
 use Doctrine\Common\Persistence\ObjectManager;
 
 class LoadComponentUnitData extends MaderaFixtures{
-
-    /**
-     * Load data fixtures with the passed EntityManager
-     *
-     * @param ObjectManager $manager
-     */
+    const LONGUEUR = 'component-unit-lg';
+    const PIECE = 'component-unit-piece';
+    const SURFACE = 'component-unit-surface';
     public function load(ObjectManager $manager) {
 
         $lgUnit = new ComponentUnit();
@@ -30,9 +27,9 @@ class LoadComponentUnitData extends MaderaFixtures{
 
         $manager->flush();
 
-        $this->addReference('component-unit-lg', $lgUnit);
-        $this->addReference('component-unit-piece', $pieceUnit);
-        $this->addReference('component-unit-surface', $surface);
+        $this->addReference(LoadComponentUnitData::LONGUEUR, $lgUnit);
+        $this->addReference(LoadComponentUnitData::PIECE, $pieceUnit);
+        $this->addReference(LoadComponentUnitData::SURFACE, $surface);
     }
 
     /**
