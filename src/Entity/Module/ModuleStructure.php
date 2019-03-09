@@ -1,8 +1,4 @@
 <?php
-/**
- * Created by Jules Aubel
- * Date: 15/02/19
- */
 
 namespace App\Entity\Module;
 
@@ -31,6 +27,18 @@ class ModuleStructure
      * @ORM\Column(type="integer")
      */
     private $id;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Module", inversedBy="components")
+     * @ORM\JoinColumn(name="module_id", referencedColumnName="id", nullable=FALSE)
+     */
+    protected $module;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="\App\Entity\Component\Component", inversedBy="modules")
+     * @ORM\JoinColumn(name="company_id", referencedColumnName="id", nullable=FALSE)
+     */
+    protected $component;
 
     /**
      * @var float Component quantity
