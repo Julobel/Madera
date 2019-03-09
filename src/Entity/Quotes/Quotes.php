@@ -7,6 +7,8 @@
 namespace App\Entity\Quotes;
 
 use ApiPlatform\Core\Annotation\ApiResource;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
 
@@ -15,41 +17,54 @@ use Symfony\Component\Serializer\Annotation\Groups;
  * @package App\Entity\Quotes
  * @ORM\Entity
  * @ORM\Table(name="QUOTES_quotes")
- * @ApiResource(attributes={
- *     "normalization_context"={"groups"={"get", "post"}},
- *     "denormalization_context"={"groups"={"post"}}
- * })
+ * @ApiResource(
+ *     collectionOperations={
+ *          "GET"={
+ *             "normalization_context"={"groups"={"get-quotes"}}
+ *           },
+ *          "POST"={
+ *             "denormalization_context"={"groups"={"post-quotes"}}
+ *          }
+ *     },
+ *)
  */
 class Quotes
-
-/*
-
- *     denormalizationContext={"get"},
- *     normalizationContext={"post", "get"},
-
- *     collectionOperations={
- *          "POST"={
- *              "normalization_context"={"groups"={"post"}},
- *              "denormalization_context"={"groups"={"post"}},
- *          },
- *          "GET"
- *     }
- */
-
 {
-
     //////////////////////////////////
     // RELATIONS
     //////////////////////////////////
 
     /**
-     * @var \App\Entity\Quotes\QuotesAdministrativeState
-     * @Groups({"post", "get"})
+     * @Groups({"get-quotes", "post-quotes"})
      *
-     * @ORM\ManyToOne(targetEntity="\App\Entity\Quotes\QuotesAdministrativeState", cascade={"persist"})
-     * @ORM\JoinColumn(name="administrative_state_id", referencedColumnName="id", onDelete="CASCADE")
+     * @ORM\OneToMany(targetEntity="QuotesLine")
+     * @ORM\JoinColumn(name="quotes_line_id", referencedColumnName="id", onDelete="RESTRICT")
      */
-    private $administrativeState;
+     private $quotesLine;
+
+    /**
+     * @Groups({"get-quotes", "post-quotes"})
+     *
+     * @ORM\ManyToOne(targetEntity="App\Entity\Project\Project")
+     * @ORM\JoinColumn(name="project_id", referencedColumnName="id", onDelete="RESTRICT")
+     */
+    private $project;
+
+    /**
+     * @Groups({"get-quotes", "post-quotes"})
+     *
+     * @ORM\ManyToOne(targetEntity="App\Entity\Actor\ActorCommercial")
+     * @ORM\JoinColumn(name="actor_commercial_id", referencedColumnName="id", onDelete="RESTRICT")
+     */
+    private $actorCommercial;
+
+    /**
+     * @Groups({"get-quotes", "post-quotes"})
+     *
+     * @ORM\ManyToOne(targetEntity="App\Entity\Accounting\AccountingTVA")
+     * @ORM\JoinColumn(name="accounting_tva_id", referencedColumnName="id", onDelete="RESTRICT")
+     */
+    private $accountingTVA;
 
 
     //////////////////////////////////
@@ -58,7 +73,7 @@ class Quotes
 
     /**
      * @var int Id of the quotes.
-     * @Groups({"get"})
+     * @Groups({"get-quotes", "post-quotes"})
      *
      * @ORM\Id
      * @ORM\GeneratedValue
@@ -68,7 +83,7 @@ class Quotes
 
     /**
      * @var \DateTime Creation date of the quotes
-     * @Groups({"post", "get"})
+     * @Groups({"get-quotes", "post-quotes"})
      *
      * @ORM\Column(type="datetime", nullable=false)
      */
@@ -76,7 +91,7 @@ class Quotes
 
     /**
      * @var float Discount of the quotes
-     * @Groups({"post", "get"})
+     * @Groups({"get-quotes", "post-quotes"})
      *
      * @ORM\Column(type="float", nullable=true)
      */
@@ -84,28 +99,18 @@ class Quotes
 
     /**
      * @var float Selling price of the quotes
-     * @Groups({"post", "get"})
+     * @Groups({"get-quotes", "post-quotes"})
      *
      * @ORM\Column(type="float", nullable=true)
      */
     private $sellingPrice;
 
     /**
-     * @return QuotesAdministrativeState
+     * Quotes constructor.
      */
-    public function getAdministrativeState(): QuotesAdministrativeState
+    public function __construct()
     {
-        return $this->administrativeState;
-    }
-
-    /**
-     * @param QuotesAdministrativeState $administrativeState
-     * @return Quotes
-     */
-    public function setAdministrativeState(QuotesAdministrativeState $administrativeState): Quotes
-    {
-        $this->administrativeState = $administrativeState;
-        return $this;
+        $this->quotesLine = new ArrayCollection();
     }
 
     /**
@@ -177,6 +182,68 @@ class Quotes
     public function setSellingPrice(float $sellingPrice): Quotes
     {
         $this->sellingPrice = $sellingPrice;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getQuotesLine(): Collection
+    {
+        return $this->quotesLine;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getProject()
+    {
+        return $this->project;
+    }
+
+    /**
+     * @param mixed $project
+     * @return Quotes
+     */
+    public function setProject($project): Quotes
+    {
+        $this->project = $project;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getActorCommercial()
+    {
+        return $this->actorCommercial;
+    }
+
+    /**
+     * @param mixed $actorCommercial
+     * @return Quotes
+     */
+    public function setActorCommercial($actorCommercial): Quotes
+    {
+        $this->actorCommercial = $actorCommercial;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getAccountingTVA()
+    {
+        return $this->accountingTVA;
+    }
+
+    /**
+     * @param mixed $accountingTVA
+     * @return Quotes
+     */
+    public function setAccountingTVA($accountingTVA): Quotes
+    {
+        $this->accountingTVA = $accountingTVA;
         return $this;
     }
 

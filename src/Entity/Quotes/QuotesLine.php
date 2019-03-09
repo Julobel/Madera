@@ -8,6 +8,7 @@ namespace App\Entity\Quotes;
 
 use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * Class QuotesAdministrativeState
@@ -18,6 +19,18 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class QuotesLine
 {
+    //////////////////////////////////
+    // RELATIONS
+    //////////////////////////////////
+
+    /**
+     * @Groups({"get-quotes", "post-quotes"})
+     *
+     * @ORM\ManyToOne(targetEntity="Quotes")
+     * @ORM\JoinColumn(name="quotes_id", referencedColumnName="id", onDelete="RESTRICT")
+     */
+    private $quotes;
+
 
     //////////////////////////////////
     // PROPERTIES
