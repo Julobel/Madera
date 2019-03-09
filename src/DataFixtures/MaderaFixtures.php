@@ -33,7 +33,10 @@ abstract class MaderaFixtures extends Fixture implements OrderedFixtureInterface
     const ACCOUNTING_TVA = 1;
     const ACCOUNTING_MARGIN = 1;
     const ACCOUNTING_VALUE_RATE = MaderaFixtures::ACCOUNTING_MARGIN + 1;
+
     //ACTOR PACKAGE
+    const ACTOR_CLIENT = 1;
+    const ACTOR_COMMERCIAL = 1;
 
     //PROJECT PACKAGE
 
