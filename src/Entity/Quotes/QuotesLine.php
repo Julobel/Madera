@@ -113,4 +113,20 @@ class QuotesLine
         return $this;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getQuotes()
+    {
+        return $this->quotes;
+    }
+
+    /**
+     * @param mixed $quotes
+     */
+    public function setQuotes($quotes): void
+    {
+        $this->quotes = $quotes;
+    }
+
 }
