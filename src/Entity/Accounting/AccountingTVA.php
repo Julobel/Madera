@@ -8,6 +8,7 @@ namespace App\Entity\Accounting;
 
 use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * Class AccountingTVA
@@ -18,13 +19,13 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class AccountingTVA
 {
-
     //////////////////////////////////
     // PROPERTIES
     //////////////////////////////////
 
     /**
      * @var int AccountingTVA Id
+     * @Groups({"get-quotes"})
      *
      * @ORM\Id
      * @ORM\GeneratedValue
@@ -34,6 +35,7 @@ class AccountingTVA
 
     /**
      * @var string AccountingTVA Label
+     * @Groups({"get-quotes"})
      *
      * @ORM\Column(type="string", nullable=false)
      */
@@ -41,6 +43,7 @@ class AccountingTVA
 
     /**
      * @var boolean AccountingTVA applicable
+     * @Groups({"get-quotes"})
      *
      * @ORM\Column(type="boolean", nullable=false)
      */

@@ -8,16 +8,38 @@ namespace App\Entity\Project;
 
 use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * Class Project
  * @package App\Entity\Actor
  * @ORM\Entity
  * @ORM\Table(name="PROJECT_project")
- * @ApiResource()
+ * @ApiResource(
+ *     collectionOperations={
+ *          "GET"={
+ *             "normalization_context"={"groups"={"get-project"}}
+ *           },
+ *          "POST"={
+ *             "denormalization_context"={"groups"={"post-project"}}
+ *          }
+ *     },
+ *)
  */
 class Project
 {
+    //////////////////////////////////
+    // RELATIONS
+    //////////////////////////////////
+
+    /**
+     * @Groups({"get-quotes", "get-project", "post-project"})
+     *
+     * @ORM\ManyToOne(targetEntity="App\Entity\Actor\ActorClient")
+     * @ORM\JoinColumn(name="actor_client_id", referencedColumnName="id", onDelete="RESTRICT")
+     */
+    private $actorClientId;
+
 
     //////////////////////////////////
     // PROPERTIES
@@ -25,6 +47,7 @@ class Project
 
     /**
      * @var int Id of the project
+     * @Groups({"get-quotes", "get-project", "post-project"})
      *
      * @ORM\Id
      * @ORM\GeneratedValue
@@ -34,6 +57,7 @@ class Project
 
     /**
      * @var string Name of the project
+     * @Groups({"get-quotes", "get-project", "post-project"})
      *
      * @ORM\Column(type="string", nullable=false)
      */
@@ -41,6 +65,7 @@ class Project
 
     /**
      * @var \DateTime Date of the project
+     * @Groups({"get-quotes", "post-project"})
      *
      * @ORM\Column(type="datetime", nullable=false)
      */
@@ -97,6 +122,24 @@ class Project
     public function setDate(\DateTime $date): Project
     {
         $this->date = $date;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getActorClientId()
+    {
+        return $this->actorClientId;
+    }
+
+    /**
+     * @param mixed $actorClientId
+     * @return Project
+     */
+    public function setActorClientId($actorClientId): Project
+    {
+        $this->actorClientId = $actorClientId;
         return $this;
     }
 
