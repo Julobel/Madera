@@ -46,6 +46,6 @@ class LoadRangeData extends MaderaFixtures{
      * @return integer
      */
     public function getOrder() {
-        return MaderaFixtures::ACCOUNTING_MARGIN;
+        return MaderaFixtures::RANGE;
     }
 }

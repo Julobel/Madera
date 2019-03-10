@@ -1,13 +1,10 @@
 <?php
-/**
- * Created by Jules Aubel
- * Date: 15/02/19
- */
 
 namespace App\Entity\Module;
 
 use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * Class ModuleWoodenFrameworkType
@@ -25,6 +22,7 @@ class ModuleWoodenFrameworkType
 
     /**
      * @var int WoodenFrameworkType Id
+     * @Groups({"get-module", "post-module"})
      *
      * @ORM\Id
      * @ORM\GeneratedValue
@@ -34,6 +32,7 @@ class ModuleWoodenFrameworkType
 
     /**
      * @var string WoodenFrameworkType Label
+     * @Groups({"get-module", "post-module"})
      *
      * @ORM\Column(type="string", nullable=false)
      */

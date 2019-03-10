@@ -1,8 +1,4 @@
 <?php
-/**
- * Created by Jules Aubel
- * Date: 15/02/19
- */
 
 namespace App\Entity\Component;
 
@@ -34,8 +30,7 @@ class ComponentNature
     //////////////////////////////////
 
     /**
-     * @Groups({"get-component-nature", "post-component-nature"})
-     * @Groups({"get-component-component", "post-component-component"})
+     * @Groups({"get-component-component","get-component-nature", "post-component-nature"})
      *
      * @ORM\ManyToOne(targetEntity="ComponentUnit")
      * @ORM\JoinColumn(name="component_unit_id", referencedColumnName="id", onDelete="RESTRICT")
@@ -48,7 +43,7 @@ class ComponentNature
 
     /**
      * @var int ComponentNature Id
-     * @Groups({"get-component-nature", "post-component-nature"})
+     * @Groups({"get-component-component","get-component-nature", "post-component-nature"})
      *
      * @ORM\Id
      * @ORM\GeneratedValue
@@ -58,7 +53,7 @@ class ComponentNature
 
     /**
      * @var string ComponentNature Label
-     * @Groups({"get-component-nature", "post-component-nature"})
+     * @Groups({"get-component-component","get-component-nature", "post-component-nature"})
      *
      * @ORM\Column(type="string", nullable=false)
      */
@@ -73,10 +68,10 @@ class ComponentNature
     }
 
     /**
-     * @param mixed $componentUnit
+     * @param ComponentUnit $componentUnit
      * @return ComponentNature
      */
-    public function setComponentUnit($componentUnit): ComponentNature
+    public function setComponentUnit(ComponentUnit $componentUnit): ComponentNature
     {
         $this->componentUnit = $componentUnit;
         return $this;

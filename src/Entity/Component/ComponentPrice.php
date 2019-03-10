@@ -54,7 +54,7 @@ class ComponentPrice
 
     /**
      * @var int ComponentPrice Id
-     * @Groups({"get-component-component", "post-component-component"})
+     * @Groups({"get-component-component"})
      *
      * @ORM\Id
      * @ORM\GeneratedValue
@@ -64,7 +64,7 @@ class ComponentPrice
 
     /**
      * @var float ComponentPrice Value
-     * @Groups({"get-component-component", "post-component-component"})
+     * @Groups({"get-component-component"})
      *
      * @ORM\Column(type="float", nullable=false)
      */
@@ -72,7 +72,7 @@ class ComponentPrice
 
     /**
      * @var \DateTime ComponentPrice start date
-     * @Groups({"get-component-component", "post-component-component"})
+     * @Groups({"get-component-component"})
      *
      * @ORM\Column(type="datetime")
      */
@@ -80,7 +80,7 @@ class ComponentPrice
 
     /**
      * @var mixed ComponentPrice end date
-     * @Groups({"get-component-component", "post-component-component"})
+     * @Groups({"get-component-component"})
      *
      * @ORM\Column(type="datetime", nullable=true)
      */

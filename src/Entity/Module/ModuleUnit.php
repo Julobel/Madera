@@ -1,13 +1,10 @@
 <?php
-/**
- * Created by Jules Aubel
- * Date: 15/02/19
- */
 
 namespace App\Entity\Module;
 
 use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * Class ModuleUnit
@@ -25,6 +22,7 @@ class ModuleUnit
 
     /**
      * @var int Id of the unit
+     * @Groups({"get-module", "get-module-nature"})
      *
      * @ORM\Id
      * @ORM\GeneratedValue
@@ -34,6 +32,7 @@ class ModuleUnit
 
     /**
      * @var string Label of the unit
+     * @Groups({"get-module", "get-module-nature"})
      *
      * @ORM\Column(type="string", nullable=false)
      */
