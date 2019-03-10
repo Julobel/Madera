@@ -35,6 +35,8 @@ class LoadActorClients extends MaderaFixtures
             $client->setPhoneNumber('060606060' . $i);
 
             $manager->persist($client);
+
+            $this->addReference('client' . $i, $client);
         }
         $manager->flush();
     }

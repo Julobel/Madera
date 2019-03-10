@@ -39,6 +39,9 @@ abstract class MaderaFixtures extends Fixture implements OrderedFixtureInterface
     const ACTOR_COMMERCIAL = 1;
 
     //PROJECT PACKAGE
+    const PROJECT = MaderaFixtures::ACTOR_CLIENT + 1;
+
+    //PROJECT PACKAGE
 
     //QUOTES PACKAGE
     const QUOTES = MaderaFixtures::ACCOUNTING_TVA + 1;

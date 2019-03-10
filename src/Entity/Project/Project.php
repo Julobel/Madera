@@ -67,7 +67,7 @@ class Project
      * @var \DateTime Date of the project
      * @Groups({"get-quotes", "post-project"})
      *
-     * @ORM\Column(type="datetime", nullable=false)
+     * @ORM\Column(type="date", nullable=false)
      */
     private $date;
 
