@@ -134,7 +134,7 @@ class Module
      * @var float Height of the module
      * @Groups({"get-module", "post-module"})
      *
-     * @ORM\Column(type="integer", nullable=false)
+     * @ORM\Column(type="float", nullable=false)
      */
     private $height;
 
@@ -142,7 +142,7 @@ class Module
      * @var float Length of the module
      * @Groups({"get-module", "post-module"})
      *
-     * @ORM\Column(type="integer", nullable=false)
+     * @ORM\Column(type="float", nullable=false)
      */
     private $length;
 

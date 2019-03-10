@@ -19,7 +19,7 @@ class LoadModuleData extends MaderaFixtures{
         $mursDroit = new Module();
         $mursDroit->setLabel('Mur droit')
             ->setDiscount(0)
-            ->setLength(0)
+            ->setLength(4)
             ->setHeight(2.5)
             ->setModuleWoodenFramework($this->getReference(LoadModuleWoodenFrameworkTypeData::SANS_ANGLE))
             ->setModuleNature($this->getReference(LoadModuleNatureData::MURS_EXTERIEURS))
@@ -31,7 +31,7 @@ class LoadModuleData extends MaderaFixtures{
         $mursAngle = new Module();
         $mursAngle->setLabel('Mur droit')
             ->setDiscount(0)
-            ->setLength(0)
+            ->setLength(5)
             ->setHeight(2.5)
             ->setModuleWoodenFramework($this->getReference(LoadModuleWoodenFrameworkTypeData::ANGLE_FERMANT))
             ->setModuleNature($this->getReference(LoadModuleNatureData::MURS_EXTERIEURS))
@@ -43,8 +43,8 @@ class LoadModuleData extends MaderaFixtures{
         $plancherChene = new Module();
         $plancherChene->setLabel('Plancher Chêne')
                   ->setDiscount(0.10)
-                  ->setLength(0)
-                  ->setHeight(0)
+                  ->setLength(3)
+                  ->setHeight(0.50)
             ->setModuleWoodenFramework($this->getReference(LoadModuleWoodenFrameworkTypeData::ANGLE_FERMANT))
             ->setModuleNature($this->getReference(LoadModuleNatureData::PLANCHER_DALLE))
             ->setModuleRange($this->getReference(LoadRangeData::PREMIUM));
@@ -54,8 +54,8 @@ class LoadModuleData extends MaderaFixtures{
         $plancherTek = new Module();
         $plancherTek->setLabel('Plancher Teck')
             ->setDiscount(0.10)
-            ->setLength(0)
-            ->setHeight(0)
+            ->setLength(2)
+            ->setHeight(0.70)
             ->setModuleWoodenFramework($this->getReference(LoadModuleWoodenFrameworkTypeData::ANGLE_FERMANT))
             ->setModuleNature($this->getReference(LoadModuleNatureData::PLANCHER_DALLE))
             ->setModuleRange($this->getReference(LoadRangeData::PREMIUM));
