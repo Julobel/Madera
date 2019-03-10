@@ -51,7 +51,7 @@ class Component
 
     /**
      * @var Collection $componentPrices
-     * @Groups({"get-component-component", "post-component-component"})
+     * @Groups({"get-component-component", "post-component-component", "get-module"})
      *
      * @ORM\OneToMany(targetEntity="ComponentPrice", mappedBy="component", cascade={"persist"})
      */

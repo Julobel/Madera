@@ -5,6 +5,7 @@ namespace App\Entity\Module;
 use ApiPlatform\Core\Annotation\ApiResource;
 use App\Entity\Component\Component;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * Class ModuleStructure
@@ -21,6 +22,7 @@ class ModuleStructure
 
     /**
      * @var Module $module
+     *
      * @ORM\ManyToOne(targetEntity="Module", inversedBy="structureComponents")
      * @ORM\JoinColumn(name="module_id", referencedColumnName="id", nullable=FALSE)
      */
@@ -28,7 +30,9 @@ class ModuleStructure
 
     /**
      * @var Component $component
-         * @ORM\ManyToOne(targetEntity="\App\Entity\Component\Component", inversedBy="structureOf")
+     * @Groups({"get-module"})
+     *
+     * @ORM\ManyToOne(targetEntity="\App\Entity\Component\Component", inversedBy="structureOf")
      * @ORM\JoinColumn(name="component_id", referencedColumnName="id", nullable=FALSE)
      */
     protected $component;
@@ -39,6 +43,7 @@ class ModuleStructure
 
     /**
      * @var int Id of the unit
+     * @Groups({"get-module"})
      *
      * @ORM\Id
      * @ORM\GeneratedValue
@@ -48,6 +53,7 @@ class ModuleStructure
 
     /**
      * @var float Component quantity
+     * @Groups({"get-module"})
      *
      * @ORM\Column(type="float", nullable=false)
      */
@@ -55,6 +61,7 @@ class ModuleStructure
 
     /**
      * @var boolean
+     * @Groups({"get-module"})
      *
      * @ORM\Column(type="boolean", nullable=false)
      */
