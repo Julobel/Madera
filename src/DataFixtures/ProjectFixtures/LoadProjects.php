@@ -25,10 +25,11 @@ class LoadProjects extends MaderaFixtures
         for ($i = 0; $i < 10; $i++) {
             $project = new Project();
             $project->setName('Nom projet ' . $i);
-            $project->setDate(\DateTime::createFromFormat('d/m/Y', '1/01/201' . $i));
+            $project->setDate(\DateTime::createFromFormat('d/m/Y', '2/02/201' . $i));
             $project->setActorClientId($this->getReference('client' . $i));
 
             $manager->persist($project);
+            $this->addReference('project'.$i, $project);
         }
         $manager->flush();
     }

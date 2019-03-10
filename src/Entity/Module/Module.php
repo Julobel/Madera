@@ -3,6 +3,7 @@
 namespace App\Entity\Module;
 
 use ApiPlatform\Core\Annotation\ApiResource;
+use App\Entity\Quotes\QuotesLine;
 use App\Entity\Range\Range;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
@@ -30,6 +31,14 @@ class Module
     //////////////////////////////////
     // RELATIONS
     //////////////////////////////////
+
+    /**
+     *
+     * @var Collection $quotesLines
+     *
+     * @ORM\OneToMany(targetEntity="\App\Entity\Quotes\QuotesLine", mappedBy="module", cascade={"persist"}))
+     */
+    private $quotesLines;
 
     /**
      * @var Range $moduleRange
@@ -89,6 +98,7 @@ class Module
 
     public function __construct() {
         $this->structureComponents = new ArrayCollection();
+        $this->quotesLines = new ArrayCollection();
     }
     //////////////////////////////////
     // PROPERTIES
@@ -274,5 +284,25 @@ class Module
         return $this;
     }
 
+    /**
+     * @return Collection
+     */
+    public function getQuotesLines(): Collection
+    {
+        return $this->quotesLines;
+    }
+
+    /**
+     * @param QuotesLine $quoteLine
+     * @return Module
+     */
+    public function addQuoteLine(QuotesLine $quoteLine) : Module{
+        // Si l'objet fait déjà partie de la collection on ne l'ajoute pas
+        if (!$this->quotesLines->contains($quoteLine)) {
+            $this->quotesLines->add($quoteLine);
+            $quoteLine->setModule($this);
+        }
+        return $this;
+    }
 
 }
