@@ -33,12 +33,21 @@ class QuotesAdministrativeStateHistory
     //////////////////////////////////
 
     /**
+     * @var QuotesAdministrativeState $quotesAdministrativeState
      * @Groups({"get-quotes-administrative-state-history", "post-quotes-administrative-state-history"})
      *
-     * @ORM\ManyToOne(targetEntity="QuotesAdministrativeState")
-     * @ORM\JoinColumn(name="quotes_administrative_state_id", referencedColumnName="id", onDelete="CASCADE")
+     * @ORM\ManyToOne(targetEntity="QuotesAdministrativeState", inversedBy="quotesAdministrativeStateHistory", cascade={"persist"}))
+     * @ORM\JoinColumn(name="quotes_administrative_state_id", referencedColumnName="id", onDelete="RESTRICT")
      */
     private $quotesAdministrativeState;
+
+    /**
+     * @var Quotes $quote
+     *
+     * @ORM\ManyToOne(targetEntity="Quotes", inversedBy="quotesAdministrativeStateHistory", cascade={"persist"}))
+     * @ORM\JoinColumn(name="quotes_id", referencedColumnName="id", onDelete="RESTRICT")
+     */
+    private $quote;
 
     //////////////////////////////////
     // PROPERTIES
@@ -63,18 +72,18 @@ class QuotesAdministrativeStateHistory
     private $dateApplication;
 
     /**
-     * @return mixed
+     * @return QuotesAdministrativeState
      */
-    public function getQuotesAdministrativeState()
+    public function getQuotesAdministrativeState() : QuotesAdministrativeState
     {
         return $this->quotesAdministrativeState;
     }
 
     /**
-     * @param mixed $quotesAdministrativeState
+     * @param QuotesAdministrativeState $quotesAdministrativeState
      * @return QuotesAdministrativeStateHistory
      */
-    public function setQuotesAdministrativeState($quotesAdministrativeState): QuotesAdministrativeStateHistory
+    public function setQuotesAdministrativeState(QuotesAdministrativeState $quotesAdministrativeState): QuotesAdministrativeStateHistory
     {
         $this->quotesAdministrativeState = $quotesAdministrativeState;
         return $this;
@@ -113,6 +122,22 @@ class QuotesAdministrativeStateHistory
     public function setDateApplication(\DateTime $dateApplication): QuotesAdministrativeStateHistory
     {
         $this->dateApplication = $dateApplication;
+        return $this;
+    }
+
+    /**
+     * @return Quotes
+     */
+    public function getQuote(): Quotes {
+        return $this->quote;
+    }
+
+    /**
+     * @param Quotes $quote
+     * @return QuotesAdministrativeStateHistory
+     */
+    public function setQuote(Quotes $quote): QuotesAdministrativeStateHistory {
+        $this->quote = $quote;
         return $this;
     }
 

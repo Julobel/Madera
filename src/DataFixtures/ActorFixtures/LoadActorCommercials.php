@@ -1,8 +1,4 @@
 <?php
-/**
- * Created by Jules Aubel
- * Date: 09/03/19
- */
 
 namespace App\DataFixtures\ActorFixtures;
 
@@ -29,6 +25,7 @@ class LoadActorCommercials extends MaderaFixtures
             $commercial->setPhoneNUmber('060606060' . $i);
 
             $manager->persist($commercial);
+            $this->addReference('commercial' . $i, $commercial);
         }
         $manager->flush();
     }

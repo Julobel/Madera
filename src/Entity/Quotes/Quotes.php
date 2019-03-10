@@ -1,12 +1,9 @@
 <?php
-/**
- * Created by Jules Aubel
- * Date: 14/02/19
- */
 
 namespace App\Entity\Quotes;
 
 use ApiPlatform\Core\Annotation\ApiResource;
+use App\Entity\Project\Project;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -35,12 +32,12 @@ class Quotes
     //////////////////////////////////
 
     /**
+     * @var Collection $quotesLines
      * @Groups({"get-quotes", "post-quotes"})
      *
-     * @ORM\OneToMany(targetEntity="QuotesLine", mappedBy="quotes", cascade={"persist"}))
-     * @ORM\JoinColumn(name="quotes_line_id", referencedColumnName="id", onDelete="RESTRICT")
+     * @ORM\OneToMany(targetEntity="QuotesLine", mappedBy="quote", cascade={"persist"}))
      */
-     private $quotesLine;
+     private $quotesLines;
 
     /**
      * @Groups({"get-quotes", "post-quotes"})
@@ -66,6 +63,58 @@ class Quotes
      */
     private $accountingTVA;
 
+    /**
+     * @var Collection $quotesAdministrativeStateHistory
+     *
+     * @ORM\OneToMany(targetEntity="QuotesAdministrativeStateHistory", mappedBy="quote", cascade={"persist"}))
+     */
+    private $quotesAdministrativeStateHistory;
+
+    /**
+     * @return Collection
+     */
+    public function getQuotesAdministrativeStateHistory(): Collection {
+        return $this->quotesAdministrativeStateHistory;
+    }
+
+    /**
+     * @param QuotesAdministrativeStateHistory $quotesAdministrativeStateHistory
+     * @return Quotes
+     */
+    public function addAdministrativeStateHistory(QuotesAdministrativeStateHistory $quotesAdministrativeStateHistory) : Quotes{
+        // Si l'objet fait déjà partie de la collection on ne l'ajoute pas
+        if (!$this->quotesAdministrativeStateHistory->contains($quotesAdministrativeStateHistory)) {
+            $this->quotesAdministrativeStateHistory->add($quotesAdministrativeStateHistory);
+            $quotesAdministrativeStateHistory->setQuote($this);
+        }
+        return $this;
+    }
+    /**
+     * @var Collection $quotesProgressStatusHistory
+     *
+     * @ORM\OneToMany(targetEntity="QuotesProgressStatusHistory", mappedBy="quote", cascade={"persist"}))
+     */
+    private $quotesProgressStatusHistory;
+
+    /**
+     * @return Collection
+     */
+    public function getQuotesProgressStatusHistory(): Collection {
+        return $this->quotesProgressStatusHistory;
+    }
+
+    /**
+     * @param QuotesProgressStatusHistory $quotesProgressStatusHistory
+     * @return Quotes
+     */
+    public function addProgressStatusHistory(QuotesProgressStatusHistory $quotesProgressStatusHistory) : Quotes{
+        // Si l'objet fait déjà partie de la collection on ne l'ajoute pas
+        if (!$this->quotesProgressStatusHistory->contains($quotesProgressStatusHistory)) {
+            $this->quotesProgressStatusHistory->add($quotesProgressStatusHistory);
+            $quotesProgressStatusHistory->setQuote($this);
+        }
+        return $this;
+    }
 
     //////////////////////////////////
     // PROPERTIES
@@ -110,7 +159,9 @@ class Quotes
      */
     public function __construct()
     {
-        $this->quotesLine = new ArrayCollection();
+        $this->quotesLines = new ArrayCollection();
+        $this->quotesAdministrativeStateHistory = new ArrayCollection();
+        $this->quotesProgressStatusHistory = new ArrayCollection();
     }
 
     /**
@@ -186,17 +237,31 @@ class Quotes
     }
 
     /**
-     * @return mixed
+     * @return Collection
      */
-    public function getQuotesLine(): Collection
+    public function getQuotesLines(): Collection
     {
-        return $this->quotesLine;
+        return $this->quotesLines;
     }
 
     /**
-     * @return mixed
+     * @param QuotesLine $quoteLine
+     * @return Quotes
      */
-    public function getProject()
+    public function addQuoteLine(QuotesLine $quoteLine) : Quotes{
+        // Si l'objet fait déjà partie de la collection on ne l'ajoute pas
+        if (!$this->quotesLines->contains($quoteLine)) {
+            $this->quotesLines->add($quoteLine);
+            $quoteLine->setQuote($this);
+        }
+        return $this;
+    }
+
+
+    /**
+     * @return Project
+     */
+    public function getProject(): Project
     {
         return $this->project;
     }
@@ -246,5 +311,7 @@ class Quotes
         $this->accountingTVA = $accountingTVA;
         return $this;
     }
+
+
 
 }

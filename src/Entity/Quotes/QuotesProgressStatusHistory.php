@@ -1,8 +1,4 @@
 <?php
-/**
- * Created by Jules Aubel
- * Date: 15/02/19
- */
 
 namespace App\Entity\Quotes;
 
@@ -33,12 +29,22 @@ class QuotesProgressStatusHistory
     //////////////////////////////////
 
     /**
+     * @var QuotesProgressStatus $quotesProgressStatus
      * @Groups({"get-quotes-progress-status-history", "post-quotes-progress-status-history"})
      *
-     * @ORM\ManyToOne(targetEntity="QuotesProgressStatus")
+     * @ORM\ManyToOne(targetEntity="QuotesProgressStatus", inversedBy="quotesProgressStatusHistory", cascade={"persist"}))
      * @ORM\JoinColumn(name="quotes_progress_status_id", referencedColumnName="id", onDelete="RESTRICT")
      */
     private $quotesProgressStatus;
+
+    /**
+     * @var Quotes $quote
+     * @Groups({"get-quotes-progress-status-history", "post-quotes-progress-status-history"})
+     *
+     * @ORM\ManyToOne(targetEntity="Quotes", inversedBy="quotesProgressStatusHistory", cascade={"persist"}))
+     * @ORM\JoinColumn(name="quotes_id", referencedColumnName="id", onDelete="RESTRICT")
+     */
+    private $quote;
 
     //////////////////////////////////
     // PROPERTIES
@@ -63,18 +69,18 @@ class QuotesProgressStatusHistory
     private $dateApplication;
 
     /**
-     * @return mixed
+     * @return QuotesProgressStatus
      */
-    public function getQuotesProgressStatus()
+    public function getQuotesProgressStatus() : QuotesProgressStatus
     {
         return $this->quotesProgressStatus;
     }
 
     /**
-     * @param mixed $quotesProgressStatus
+     * @param QuotesProgressStatus $quotesProgressStatus
      * @return QuotesProgressStatusHistory
      */
-    public function setQuotesProgressStatus($quotesProgressStatus): QuotesProgressStatusHistory
+    public function setQuotesProgressStatus(QuotesProgressStatus $quotesProgressStatus): QuotesProgressStatusHistory
     {
         $this->quotesProgressStatus = $quotesProgressStatus;
         return $this;
@@ -115,5 +121,22 @@ class QuotesProgressStatusHistory
         $this->dateApplication = $dateApplication;
         return $this;
     }
+
+    /**
+     * @return Quotes
+     */
+    public function getQuote(): Quotes {
+        return $this->quote;
+    }
+
+    /**
+     * @param Quotes $quote
+     * @return QuotesProgressStatusHistory
+     */
+    public function setQuote(Quotes $quote): QuotesProgressStatusHistory {
+        $this->quote = $quote;
+        return $this;
+    }
+
 
 }

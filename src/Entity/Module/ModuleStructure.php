@@ -28,7 +28,7 @@ class ModuleStructure
 
     /**
      * @var Component $component
-     * @ORM\ManyToOne(targetEntity="\App\Entity\Component\Component", inversedBy="structureOf")
+         * @ORM\ManyToOne(targetEntity="\App\Entity\Component\Component", inversedBy="structureOf")
      * @ORM\JoinColumn(name="component_id", referencedColumnName="id", nullable=FALSE)
      */
     protected $component;
