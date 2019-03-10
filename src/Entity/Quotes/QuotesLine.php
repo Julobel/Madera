@@ -1,12 +1,9 @@
 <?php
-/**
- * Created by Jules Aubel
- * Date: 15/02/19
- */
 
 namespace App\Entity\Quotes;
 
 use ApiPlatform\Core\Annotation\ApiResource;
+use App\Entity\Module\Module;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
 
@@ -24,13 +21,22 @@ class QuotesLine
     //////////////////////////////////
 
     /**
+     * @var Quotes $quote
      * @Groups({"get-quotes", "post-quotes"})
      *
-     * @ORM\ManyToOne(targetEntity="Quotes")
+     * @ORM\ManyToOne(targetEntity="Quotes", inversedBy="quotesLines"))
      * @ORM\JoinColumn(name="quotes_id", referencedColumnName="id", onDelete="RESTRICT")
      */
-    private $quotes;
+    private $quote;
 
+    /**
+     * @var Module $module
+     * @Groups({"get-quotes", "post-quotes"})
+     *
+     * @ORM\ManyToOne(targetEntity="\App\Entity\Module\Module", inversedBy="quotesLines"))
+     * @ORM\JoinColumn(name="module_id", referencedColumnName="id", onDelete="RESTRICT")
+     */
+    private $module;
 
     //////////////////////////////////
     // PROPERTIES
@@ -114,19 +120,39 @@ class QuotesLine
     }
 
     /**
-     * @return mixed
+     * @return Quotes
      */
-    public function getQuotes()
+    public function getQuote() : Quotes
     {
-        return $this->quotes;
+        return $this->quote;
     }
 
     /**
-     * @param mixed $quotes
+     * @param Quotes $quote
+     * @return QuotesLine
      */
-    public function setQuotes($quotes): void
+    public function setQuote(Quotes $quote): QuotesLine
     {
-        $this->quotes = $quotes;
+        $this->quote = $quote;
+        return $this;
     }
+
+    /**
+     * @return Module
+     */
+    public function getModule(): Module {
+        return $this->module;
+    }
+
+    /**
+     * @param Module $module
+     * @return QuotesLine
+     */
+    public function setModule(Module $module): QuotesLine {
+        $this->module = $module;
+        return $this;
+    }
+
+
 
 }

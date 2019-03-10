@@ -9,6 +9,8 @@ namespace App\Entity\Quotes;
 use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 
 /**
  * Class QuotesAdministrativeState
@@ -19,6 +21,41 @@ use Symfony\Component\Serializer\Annotation\Groups;
  */
 class QuotesProgressStatus
 {
+    //////////////////////////////////
+    // RELATIONS
+    //////////////////////////////////
+
+    /**
+     * @var Collection $quotesProgressStatusHistory
+     *
+     * @ORM\OneToMany(targetEntity="QuotesProgressStatusHistory", mappedBy="quotesProgressStatus", cascade={"persist"}))
+     */
+    private $quotesProgressStatusHistory;
+
+    /**
+     * @return Collection
+     */
+    public function getQuotesProgressStatusHistory(): Collection {
+        return $this->quotesProgressStatusHistory;
+    }
+
+    /**
+     * @param QuotesProgressStatusHistory $quotesProgressStatusHistory
+     * @return QuotesProgressStatus
+     */
+    public function addHistory(QuotesProgressStatusHistory $quotesProgressStatusHistory) : QuotesProgressStatus{
+        // Si l'objet fait déjà partie de la collection on ne l'ajoute pas
+        if (!$this->quotesProgressStatusHistory->contains($quotesProgressStatusHistory)) {
+            $this->quotesProgressStatusHistory->add($quotesProgressStatusHistory);
+            $quotesProgressStatusHistory->setQuotesProgressStatus($this);
+        }
+        return $this;
+    }
+
+    public function __construct()
+    {
+        $this->quotesProgressStatusHistory = new ArrayCollection();
+    }
 
     //////////////////////////////////
     // PROPERTIES

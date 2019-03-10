@@ -1,14 +1,13 @@
 <?php
-/**
- * Created by Jules Aubel
- * Date: 15/02/19
- */
 
 namespace App\Entity\Project;
 
 use ApiPlatform\Core\Annotation\ApiResource;
+use App\Entity\Quotes\Quotes;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 
 /**
  * Class Project
@@ -40,7 +39,36 @@ class Project
      */
     private $actorClientId;
 
+    /**
+     * @var Collection $quotes
+     *
+     * @ORM\OneToMany(targetEntity="\App\Entity\Quotes\Quotes", mappedBy="project", cascade={"persist"}))
+     */
+    private $quotes;
 
+    /**
+     * @return Collection
+     */
+    public function getQuotes(): Collection {
+        return $this->quotes;
+    }
+
+    /**
+     * @param Quotes $quote
+     * @return Project
+     */
+    public function addQuote(Quotes $quote) : Project{
+        // Si l'objet fait déjà partie de la collection on ne l'ajoute pas
+        if (!$this->quotes->contains($quote)) {
+            $this->quotes->add($quote);
+            $quote->setProject($this);
+        }
+        return $this;
+    }
+    public function __construct()
+    {
+        $this->quotes = new ArrayCollection();
+    }
     //////////////////////////////////
     // PROPERTIES
     //////////////////////////////////
