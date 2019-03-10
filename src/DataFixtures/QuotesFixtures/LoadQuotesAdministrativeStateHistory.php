@@ -35,6 +35,8 @@ class LoadQuotesAdministrativeStateHistory extends MaderaFixtures {
             ->setDateApplication(\DateTime::createFromFormat('d/m/Y', '7/02/2019'));
         $manager ->persist($stateAdm4);
 
+        $manager->flush();
+
     }
     public function getOrder() {
         return MaderaFixtures::QUOTES_ADMINISTRATIVE_STATE_HISTORY;
