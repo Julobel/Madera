@@ -8,6 +8,7 @@ use Doctrine\Common\Persistence\ObjectManager;
 
 class LoadComponentData extends MaderaFixtures{
 
+    const PLOT = 'component-component-plot';
     const SABOT = 'component-component-sabot';
     const BA13 = 'component-component-ba13';
     const TUILE_MERIDIONALE = 'component-component-tuile-meridionale';
@@ -24,6 +25,18 @@ class LoadComponentData extends MaderaFixtures{
 
     public function load(ObjectManager $manager) {
 
+        $plot = new Component();
+        $plot ->setLabel("Plot")
+            ->setLength(0)
+            ->setSection(0)
+            ->setThickness(0)
+            ->setWidth(0)
+            ->setComponentNature($this->getReference(LoadComponentNatureData::ELT_MONTAGE))
+            ->addPrice($this->getReference(LoadComponentPriceData::PRICE.'1'))
+            ->addPrice($this->getReference(LoadComponentPriceData::PRICE.'2'));
+        $manager->persist($plot);
+        $this->addReference(LoadComponentData::PLOT, $plot);
+
         $sabot = new Component();
         $sabot ->setLabel("Sabot métallique")
             ->setLength(0)
@@ -36,7 +49,6 @@ class LoadComponentData extends MaderaFixtures{
         $manager->persist($sabot);
         $this->addReference(LoadComponentData::SABOT, $sabot);
 
-
         $ba13 = new Component();
         $ba13 ->setLabel("Plaque de plâtre")
             ->setLength(0)
@@ -47,7 +59,7 @@ class LoadComponentData extends MaderaFixtures{
             ->setComponentQuality($this->getReference(LoadComponentInteriorFinishData::PLATRE))
             ->addPrice($this->getReference(LoadComponentPriceData::PRICE.'5'))
             ->addPrice($this->getReference(LoadComponentPriceData::PRICE.'6'));
-        $manager->persist($sabot);
+        $manager->persist($plot);
         $this->addReference(LoadComponentData::BA13, $ba13);
 
         $tuile = new Component();
@@ -184,7 +196,7 @@ class LoadComponentData extends MaderaFixtures{
             ->setLength(1200)
             ->setSection(0)
             ->setThickness(20)
-            ->setWidth(50)
+            ->setWidth(120)
             ->setComponentNature($this->getReference(LoadComponentNatureData::PLANCHER))
             ->addPrice($this->getReference(LoadComponentPriceData::PRICE.'27'))
             ->addPrice($this->getReference(LoadComponentPriceData::PRICE.'28'));

@@ -3,6 +3,7 @@
 namespace App\Entity\Component;
 
 use ApiPlatform\Core\Annotation\ApiResource;
+use App\Entity\Module\ModuleStructure;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -56,9 +57,13 @@ class Component
      */
     private $componentPrices;
 
-    public function __construct() {
-        $this->componentPrices = new ArrayCollection();
-    }
+
+    /**
+     * @var Collection $structureOf
+     *
+     * @ORM\OneToMany(targetEntity="\App\Entity\Module\ModuleStructure", mappedBy="component", cascade={"persist"})
+     */
+    private $structureOf;
 
     /**
      * @return Collection
@@ -71,13 +76,39 @@ class Component
      * @param ComponentPrice $price
      * @return Component
      */
-    public function addPrice(ComponentPrice $price) {
+    public function addPrice(ComponentPrice $price) : Component {
         // Si l'objet fait déjà partie de la collection on ne l'ajoute pas
         if (!$this->componentPrices->contains($price)) {
             $this->componentPrices->add($price);
+            $price->setComponent($this);
         }
-        $price->setComponent($this);
         return $this;
+    }
+
+    /**
+     * @return Collection
+     */
+    public function getStructureOf(): Collection {
+        return $this->structureOf;
+    }
+
+
+    /**
+     * @param ModuleStructure $moduleStructure
+     * @return Component
+     */
+    public function addStructureOf(ModuleStructure $moduleStructure) : Component{
+        // Si l'objet fait déjà partie de la collection on ne l'ajoute pas
+        if (!$this->structureOf->contains($moduleStructure)) {
+            $this->structureOf->add($moduleStructure);
+            $moduleStructure->setComponent($this);
+        }
+        return $this;
+    }
+
+    public function __construct() {
+        $this->componentPrices = new ArrayCollection();
+        $this->structureOf = new ArrayCollection();
     }
 
     //////////////////////////////////
@@ -274,6 +305,7 @@ class Component
         $this->componentQuality = $componentQuality;
         return $this;
     }
+
 
 
 }
