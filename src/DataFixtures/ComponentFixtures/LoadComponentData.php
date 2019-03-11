@@ -116,44 +116,46 @@ class LoadComponentData extends MaderaFixtures{
         $manager->persist($ardoiseGrande);
         $this->addReference(LoadComponentData::ARDOISE_GRANDE, $ardoiseGrande);
 
-        $laineVerre = new Component();
-        $laineVerre->setLabel("Laine de Verre")
-            ->setLength(0)
-            ->setSection(0)
-            ->setThickness(100)
-            ->setWidth(0)
-            ->setComponentNature($this->getReference(LoadComponentNatureData::ISOLATION))
-            ->setComponentQuality($this->getReference(LoadComponentInsulationData::NATUREL))
-            ->addPrice($this->getReference(LoadComponentPriceData::PRICE.'15'))
-            ->addPrice($this->getReference(LoadComponentPriceData::PRICE.'16'));
-        $manager->persist($laineVerre);
-        $this->addReference(LoadComponentData::LAINE_VERRE, $laineVerre);
+        for($i=1;$i<5;$i++){
+            $laineVerre = new Component();
+            $laineVerre->setLabel("Laine de Verre ".$i."0mm")
+                ->setLength(0)
+                ->setSection(0)
+                ->setThickness($i*100)
+                ->setWidth(0)
+                ->setComponentNature($this->getReference(LoadComponentNatureData::ISOLATION))
+                ->setComponentQuality($this->getReference(LoadComponentInsulationData::NATUREL))
+                ->addPrice($this->getReference(LoadComponentPriceData::PRICE.($i*10+30)))
+                ->addPrice($this->getReference(LoadComponentPriceData::PRICE.($i*10+31)));
+            $manager->persist($laineVerre);
+            $this->addReference(LoadComponentData::LAINE_VERRE.$i, $laineVerre);
 
-        $laineBois = new Component();
-        $laineBois->setLabel("Laine de Bois")
-            ->setLength(0)
-            ->setSection(0)
-            ->setThickness(100)
-            ->setWidth(0)
-            ->setComponentNature($this->getReference(LoadComponentNatureData::ISOLATION))
-            ->setComponentQuality($this->getReference(LoadComponentInsulationData::BIO))
-            ->addPrice($this->getReference(LoadComponentPriceData::PRICE.'17'))
-            ->addPrice($this->getReference(LoadComponentPriceData::PRICE.'18'));
-        $manager->persist($laineBois);
-        $this->addReference(LoadComponentData::LAINE_BOIS, $laineBois);
+            $laineBois = new Component();
+            $laineBois->setLabel("Laine de Bois ".$i."0mm")
+                ->setLength(0)
+                ->setSection(0)
+                ->setThickness($i*100)
+                ->setWidth(0)
+                ->setComponentNature($this->getReference(LoadComponentNatureData::ISOLATION))
+                ->setComponentQuality($this->getReference(LoadComponentInsulationData::BIO))
+                ->addPrice($this->getReference(LoadComponentPriceData::PRICE.($i*10+32)))
+                ->addPrice($this->getReference(LoadComponentPriceData::PRICE.($i*10+33)));
+            $manager->persist($laineBois);
+            $this->addReference(LoadComponentData::LAINE_BOIS.$i, $laineBois);
 
-        $polystyrene = new Component();
-        $polystyrene->setLabel("Polystyrène Expansé")
-            ->setLength(0)
-            ->setSection(0)
-            ->setThickness(40)
-            ->setWidth(0)
-            ->setComponentNature($this->getReference(LoadComponentNatureData::ISOLATION))
-            ->setComponentQuality($this->getReference(LoadComponentInsulationData::SYNTH))
-            ->addPrice($this->getReference(LoadComponentPriceData::PRICE.'19'))
-            ->addPrice($this->getReference(LoadComponentPriceData::PRICE.'20'));
-        $manager->persist($polystyrene);
-        $this->addReference(LoadComponentData::POLYSTYRENE_EXPANSE, $polystyrene);
+            $polystyrene = new Component();
+            $polystyrene->setLabel("Polystyrène Expansé ".$i."0mm")
+                ->setLength(0)
+                ->setSection(0)
+                ->setThickness($i*10)
+                ->setWidth(0)
+                ->setComponentNature($this->getReference(LoadComponentNatureData::ISOLATION))
+                ->setComponentQuality($this->getReference(LoadComponentInsulationData::SYNTH))
+                ->addPrice($this->getReference(LoadComponentPriceData::PRICE.($i*10+34)))
+                ->addPrice($this->getReference(LoadComponentPriceData::PRICE.($i*10+35)));
+            $manager->persist($polystyrene);
+            $this->addReference(LoadComponentData::POLYSTYRENE_EXPANSE.$i, $polystyrene);
+        }
 
         $poutre35 = new Component();
         $poutre35 ->setLabel("poutre")
