@@ -15,7 +15,7 @@ class LoadQuotesLines extends MaderaFixtures {
         for ($i = 0; $i < 20; $i++) {
             $quote1line1 = new QuotesLine();
             $quote1line1->setQuote($this->getReference('quotes-1'))
-                ->setModule($this->getReference(LoadModuleData::MURS_DROIT))
+                ->setModule($this->getReference(LoadModuleData::MURS_DROIT_PREMIUM))
                 ->setModuleName('Mur Nord')
                 ->setModuleQuantity(12);
 
@@ -24,7 +24,7 @@ class LoadQuotesLines extends MaderaFixtures {
 
             $quote1line2 = new QuotesLine();
             $quote1line2->setQuote($this->getReference('quotes-1'))
-                ->setModule($this->getReference(LoadModuleData::MURS_DROIT))
+                ->setModule($this->getReference(LoadModuleData::MURS_DROIT_PREMIUM))
                 ->setModuleName('Mur Sud')
                 ->setModuleQuantity(12);
 
@@ -33,7 +33,7 @@ class LoadQuotesLines extends MaderaFixtures {
 
             $quote1line3 = new QuotesLine();
             $quote1line3->setQuote($this->getReference('quotes-1'))
-                ->setModule($this->getReference(LoadModuleData::MURS_DROIT))
+                ->setModule($this->getReference(LoadModuleData::MURS_DROIT_PREMIUM))
                 ->setModuleName('Mur Est')
                 ->setModuleQuantity(12);
 
@@ -42,7 +42,7 @@ class LoadQuotesLines extends MaderaFixtures {
 
             $quote1line4 = new QuotesLine();
             $quote1line4->setQuote($this->getReference('quotes-1'))
-                ->setModule($this->getReference(LoadModuleData::MURS_DROIT))
+                ->setModule($this->getReference(LoadModuleData::MURS_DROIT_PREMIUM))
                 ->setModuleName('Mur Ouest')
                 ->setModuleQuantity(12);
 
