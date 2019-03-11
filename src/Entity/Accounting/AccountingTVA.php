@@ -31,6 +31,7 @@ class AccountingTVA
 
     /**
      * @var float AccountingTVA Value
+     * @Groups({"get-quotes"})
      *
      * @ORM\Column(type="float", nullable=false)
      */
@@ -38,6 +39,7 @@ class AccountingTVA
 
     /**
      * @var string AccountingTVA Label
+     * @Groups({"get-quotes"})
      * @Groups({"get-quotes"})
      *
      * @ORM\Column(type="string", nullable=false)

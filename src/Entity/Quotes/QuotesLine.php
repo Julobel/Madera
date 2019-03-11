@@ -22,7 +22,7 @@ class QuotesLine
 
     /**
      * @var Quotes $quote
-     * @Groups({"get-quotes", "post-quotes"})
+     * @Groups({"post-quotes"})
      *
      * @ORM\ManyToOne(targetEntity="Quotes", inversedBy="quotesLines"))
      * @ORM\JoinColumn(name="quotes_id", referencedColumnName="id", onDelete="RESTRICT")
@@ -44,6 +44,7 @@ class QuotesLine
 
     /**
      * @var int Id of the quotes line.
+     * @Groups({"get-quotes"})
      *
      * @ORM\Id
      * @ORM\GeneratedValue
@@ -53,6 +54,7 @@ class QuotesLine
 
     /**
      * @var string Name of the module
+     * @Groups({"get-quotes"})
      *
      * @ORM\Column(type="string", nullable=false)
      */
@@ -60,6 +62,7 @@ class QuotesLine
 
     /**
      * @var float
+     * @Groups({"get-quotes"})
      *
      * @ORM\Column(type="float", nullable=false)
      */

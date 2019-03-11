@@ -59,6 +59,7 @@ class ModuleStructure
      */
     private $componentQuantity;
 
+    // TODO CHECK
     /**
      * @var boolean
      * @Groups({"get-module"})
