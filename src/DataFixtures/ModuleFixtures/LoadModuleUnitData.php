@@ -15,17 +15,17 @@ class LoadModuleUnitData extends MaderaFixtures{
     public function load(ObjectManager $manager) {
 
         $metreLineaire = new ModuleUnit();
-        $metreLineaire->setLabel('M linéaire');
+        $metreLineaire->setLabel('m');
         $manager ->persist($metreLineaire);
         $this->addReference(LoadModuleUnitData::METRE_LINEAIRE, $metreLineaire);
 
         $metreCarre = new ModuleUnit();
-        $metreCarre->setLabel('M 2');
+        $metreCarre->setLabel('m');
         $manager->persist($metreCarre);
         $this->addReference(LoadModuleUnitData::METRE_CARRE, $metreCarre);
 
         $unite = new ModuleUnit();
-        $unite->setLabel('Unité');
+        $unite->setLabel('m');
         $manager->persist($unite);
         $this->addReference(LoadModuleUnitData::UNITE, $unite);
 

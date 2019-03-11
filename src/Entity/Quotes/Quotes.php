@@ -35,7 +35,7 @@ class Quotes
      * @var Collection $quotesLines
      * @Groups({"get-quotes", "post-quotes"})
      *
-     * @ORM\OneToMany(targetEntity="QuotesLine", mappedBy="quote", cascade={"persist"}))
+     * @ORM\OneToMany(fetch="EAGER", targetEntity="QuotesLine", mappedBy="quote", cascade={"persist"}))
      */
      private $quotesLines;
 
@@ -221,7 +221,7 @@ class Quotes
     /**
      * @return float
      */
-    public function getSellingPrice(): float
+    public function getSellingPrice(): ?float
     {
         return $this->sellingPrice;
     }
